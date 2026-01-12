@@ -1,0 +1,3 @@
+python manage.py dumpdata --exclude auth.permission --exclude contenttypes --format=json > backup/data.json
+
+python manage.py loaddata db.json

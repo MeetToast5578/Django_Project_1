@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    <title>Empty Cart</title>
+{% endblock %}
+{% block content %}
+
+    <!-- breadcrumb-area start -->
+    <div class="breadcrumb-area">
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-12 text-center">
+                    <h2 class="breadcrumb-title">Empty Cart</h2>
+                    <!-- breadcrumb-list start -->
+                    <ul class="breadcrumb-list">
+                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item active">Cart</li>
+                    </ul>
+                    <!-- breadcrumb-list end -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- breadcrumb-area end -->
+
+    <!-- Cart area start -->
+    <div class="empty-cart-area pb-100px pt-100px">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="cart-heading">
+                        <h2>Your cart item</h2>
+                    </div>
+                    <div class="empty-text-contant text-center">
+                        <i class="fas fa-shopping-bag"></i>
+                        <h3>There are no more items in your cart</h3>
+                        <a class="empty-cart-btn" href="shop-4-column.html">
+                            <i class="fas fa-arrow-left"> </i> Continue shopping
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Cart area end -->
+
+
+    <div class="newsletter-area ">
+        <div class="container line-shape-bottom">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="newsletter-content mb-lm-30px">
+                        <i class="fas fa-envelope-open-text"></i>
+                        <div class="newsletter-text">
+                            <h3 class="title">Newsletter & Get Updates</h3>
+                            <p>Sign up for our newsletter to get update from us</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="news-letter-form">
+                        <div id="mc_embed_signup" class="subscribe-form">
+                            <form id="mc-embedded-subscribe-form" class="validate" novalidate="" target="_blank"
+                                name="mc-embedded-subscribe-form" method="post"
+                                action="http://devitems.us11.list-manage.com/subscribe/post?u=6bbb9b6f5827bd842d9640c82&amp;id=05d85f18ef"
+                                >
+                                <div id="mc_embed_signup_scroll" class="mc-form">
+                                    <input class="email" type="email" required=""
+                                        placeholder="Enter Your Mail Here......." name="EMAIL" value="">
+                                    <div class="mc-news d-none" aria-hidden="true">
+                                        <input type="text" value="" tabindex="-1"
+                                            name="b_6bbb9b6f5827bd842d9640c82_05d85f18ef">
+                                    </div>
+                                    <div class="clear">
+                                        <button id="mc-embedded-subscribe" class="button" type="submit" name="subscribe"
+                                            value=""> Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
