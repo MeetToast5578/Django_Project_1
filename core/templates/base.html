@@ -16,16 +16,16 @@
 
 
     <!-- vendor css (Icon Font) -->
-    <!-- <link rel="stylesheet" href="{% static 'css/vendor/bootstrap.bundle.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/vendor/bootstrap.bundle.min.css' %}" />
     <link rel="stylesheet" href="{% static 'css/vendor/pe-icon-7-stroke.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/vendor/font.awesome.css' %}" /> -->
+    <link rel="stylesheet" href="{% static 'css/vendor/font.awesome.css' %}" />
 
     <!-- plugins css (All Plugins Files) -->
-    <!-- <link rel="stylesheet" href="{% static 'css/plugins/animate.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/plugins/animate.css' %}" />
     <link rel="stylesheet" href="{% static 'css/plugins/swiper-bundle.min.css' %}" />
     <link rel="stylesheet" href="{% static 'css/plugins/jquery-ui.min.css' %}" />
     <link rel="stylesheet" href="{% static 'css/plugins/nice-select.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/plugins/venobox.css' %}" /> -->
+    <link rel="stylesheet" href="{% static 'css/plugins/venobox.css' %}" />
 
     <!-- Use the minified version files listed below for better performance and remove the files listed above -->
     <link rel="stylesheet" href="{% static 'css/vendor/vendor.min.css' %}" />
@@ -91,9 +91,14 @@
                                 </li>
                                 <li class="dropdown position-static"><a href="{% url 'shop_left_sidebar' %}">Shop </a>                                   
                                 </li>
-                                <li class="dropdown "><a href="{% url 'blog_single' %}">Blog</a>
+                                <li class="dropdown "><a href="{% url 'blog' %}">Blog</a>
                                     
                                     <li><a href="{% url 'contact' %}">Contact</a></li>
+                                    {% if request.user.is_authenticated %}
+                                    <li><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                                    {% else %}
+                                    <li><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+                                    {% endif %}
                             </ul>
                         </div>
                     </div>
@@ -332,7 +337,7 @@
                                 <li><a href="blog-grid.html">Blog Grid Page</a></li>
                                 <li><a href="blog-grid-left-sidebar.html">Grid Left Sidebar</a></li>
                                 <li><a href="blog-grid-right-sidebar.html">Grid Right Sidebar</a></li>
-                                <li><a href="{% url 'blog_single' %}">Blog Single Page</a></li>
+                                <li><a href="{% url 'blog' %}">Blog Page</a></li>
                                 <li><a href="blog-single-left-sidebar.html">Single Left Sidebar</a></li>
                                 <li><a href="blog-single-right-sidebar.html">Single Right Sidbar</a>
                             </ul>

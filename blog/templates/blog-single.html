@@ -33,73 +33,18 @@
                     <div class="blog-posts">
                         <div class="single-blog-post blog-grid-post">
                             <div class="blog-image single-blog" data-aos="fade-up" data-aos-delay="200">
-                                <img class="img-fluid h-auto" src="assets/images/blog-image/single-blog.jpg"
+                                <img class="img-fluid h-auto" src="{{ blog.cover_image.url }}"
                                     alt="blog" />
                             </div>
                             <div class="blog-post-content-inner mt-30px" data-aos="fade-up" data-aos-delay="400">
                                 <div class="blog-athor-date">
-                                    <span> By,<a class="blog-author cercle-shape" href="#"> June Cha</a></span>
-                                    <span class="blog-date" href="#">25 May, 2023</span>
+                                    <span> By,<a class="blog-author cercle-shape" href="#"> {{ blog.user.username }} </a></span>
+                                    <span class="blog-date" href="#"> {{ blog.created_at }} </span>
                                 </div>
-                                <h4 class="blog-title">How the 10 Worst Handmade Product Fails of All Time Could Have Been Prevented</h4>
-                                <p data-aos="fade-up">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magl aliqua. Ut enim ad minim veniam, quis nostrud
-                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequa Duis aute irure
-                                    dolor in reprehe in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                                    mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit
-                                    voluptatem accus doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo
-                                    inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-                                </p>
-                                <h4 class="title">Lorem ipsum dolor sit amet consectetur. </h4>
-                                <p data-aos="fade-up" data-aos-delay="200">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magl aliqua. Ut enim ad minim veniam, quis nostrud
-                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequa Duis aute irure
-                                    dolor in reprehe in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                                    mollit anim id est laborum.
-                                </p>
+                                <h4 class="blog-title"> {{ blog.title }} </h4>
                             </div>
                             <div class="single-post-content">
-                                <div class="quate-speech-area">
-
-                                    <p class="quate-speech" data-aos="fade-up" data-aos-delay="200">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                        incididunt ut labore
-                                    </p>
-                                    <img src="assets/images/blog-image/specker.jpg" alt="" class="speecker-img">
-                                </div>
-                                <p data-aos="fade-up" data-aos-delay="200">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magl aliqua. Ut enim ad minim veniam, quis nostrud
-                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequa Duis aute irure
-                                    dolor in reprehe in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                                    mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit
-                                    voluptatem accus doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo
-                                    inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-                                </p>
-                                <h3 class="title">Lorem ipsum dolor sit amet consectetur. </h3>
-                                <ul>
-                                    <li>1. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                        tempor incididunt ut labore etdur ur dolore magl aliqua. Ut enim ad minim
-                                        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                        consequa Duis aute irure dolor in reprehe in voluptate velit</li>
-                                    <li>2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                        tempor incididunt ut labore etrfuryi dolore magl aliqua. Ut enim ad minim
-                                        veniam, quis nostrud</li>
-                                    <li>3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                        tempor incididut ut labore et kifuy</li>
-                                </ul>
-                                <p class="mt-30px">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                    eiusmod tempor incididunt ut labore et dolore magl aliqua. Ut enim ad minim veniam,
-                                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequa
-                                    Duis aute irure dolor in reprehe in voluptate velit esse cillum dolore eu fugiat
-                                    nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                                    officia deserunt mollit anim id est laborum.</p>
-                            </div>
+                                <p> {{ blog.content }} </p>
                         </div>
                         <!-- single blog post -->
                     </div>
@@ -107,9 +52,9 @@
                         <div class="blog-single-tags d-flex" data-aos="fade-up" data-aos-delay="200">
                             <span class="title"><i class="fas fa-tags" aria-hidden="true"></i></span>
                             <ul class="tag-list">
-                                <li><a href="#">Fashion,</a></li>
-                                <li><a href="#">eCommerce,</a></li>
-                                <li class="m-0"><a href="#">Dress</a></li>
+                                {% for tag in blog.tags.all %}
+                                <li><a href="#">{{ tag.title }},</a></li>
+                                {% endfor %}
                             </ul>
                         </div>
                         <div class="blog-single-share mb-xs-15px d-flex" data-aos="fade-up" data-aos-delay="200">
@@ -131,8 +76,9 @@
                     </div>
 
                     <div class="comment-area">
-                        <h2 class="comment-heading" data-aos="fade-up" data-aos-delay="200">Comments (03)</h2>
+                        <h2 class="comment-heading" data-aos="fade-up" data-aos-delay="200">Comments ({{ blog.comments.count }})</h2>
                         <div class="review-wrapper">
+                            {% for comment in blog.comments.all %}
                             <div class="single-review" data-aos="fade-up" data-aos-delay="200">
                                 <div class="review-img">
                                     <img src="assets/images/comment-image/1.png" alt="" />
@@ -141,16 +87,14 @@
                                     <div class="review-top-wrap">
                                         <div class="review-left">
                                             <div class="review-name">
-                                                <h4 class="title">Aaron Nunez </h4>
-                                                <span class="date">21 July 2023</span>
+                                                <h4 class="title">{{ comment.name  }} </h4>
+                                                <span class="date">{{ comment.created_at|date:"d F Y" }}</span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="review-bottom">
                                         <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisi elit, sed do eiusmod tempor
-                                            incidid ut labore etl dolore magna aliqua. Ut enim ad minim veniam, quis
-                                            nostrud exercitati ullam laboris nisi ut aliquiex ea commodo consequat.
+                                            {{ comment.message }}
                                         </p>
                                         <div class="review-left">
                                             <a href="#"><i class="fas fa-reply-all"></i> Reply</a>
@@ -158,56 +102,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="single-review child-review" data-aos="fade-up" data-aos-delay="200">
-                                <div class="review-img">
-                                    <img src="assets/images/comment-image/2.png" alt="" />
-                                </div>
-                                <div class="review-content">
-                                    <div class="review-top-wrap">
-                                        <div class="review-left">
-                                            <div class="review-name">
-                                                <h4 class="title">Fox Mccloud </h4>
-                                                <span class="date">21 July 2023</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="review-bottom">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisi elit, sed do eiusmoddl tempor
-                                            incidid ut labore etl dolore magna aliqua. Ut enim ad minimlkill veniam,
-                                            quis nostrud exercitati ullam .</p>
-                                        <div class="review-left">
-                                            <a href="#"> <i class="fas fa-reply-all"></i> Reply</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="single-review" data-aos="fade-up" data-aos-delay="200">
-                                <div class="review-img">
-                                    <img src="assets/images/comment-image/1.png" alt="" />
-                                </div>
-                                <div class="review-content">
-                                    <div class="review-top-wrap">
-                                        <div class="review-left">
-                                            <div class="review-name">
-                                                <h4 class="title">Korbyn Colon </h4>
-                                                <span class="date">21 July 2023</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="review-bottom">
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipisi elit, sed do eiusmod tempor
-                                            incidid ut labore etl dolore magna aliqua. Ut enim ad minim veniam, quis
-                                            nostrud exercitati ullam laboris nisi ut aliquiex ea commodo consequat.
-                                        </p>
-                                        <div class="review-left">
-                                            <a href="#"> <i class="fas fa-reply-all"></i> Reply</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
+                    {% endfor %}
                     <form class="blog-comment-form" method="post" action="#" data-aos="fade-up" data-aos-delay="200">
                         {% csrf_token %}
                         {% include 'includes/messages.html' %}

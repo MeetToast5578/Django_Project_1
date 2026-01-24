@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+<title>Blog - Create</title>
+{% endblock %}
+
+
+{% block content %}
+<h1>Blog Create Page</h1>
+<p>Welcome to the blog create page of MyShop. Here you can create new blog posts and share your thoughts.</p>
+{% if request.user.is_authenticated %}
+<form class="blog-comment-form" method="post" action="#" data-aos="fade-up" data-aos-delay="200" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% include 'includes/messages.html' %}
+    {{form.non_field_errors}}
+    <h2 class="comment-heading" data-aos="fade-up" data-aos-delay="200">Create a Blog</h2>
+    <div class="form-inner">
+        <div class="row">
+            <div class="col-md-12" data-aos="fade-up" data-aos-delay="500">
+                <div class="single-form mb-lm-15px">
+                    {% comment %} <input type="email" placeholder="Subject (Optinal)" /> {% endcomment %}
+                    {{ form.cover_image }}
+                    {{ form.cover_image.errors }}
+                </div>
+            </div>
+            <div class="col-md-12" data-aos="fade-up" data-aos-delay="500">
+                <div class="single-form mb-lm-15px">
+                    {% comment %} <input type="email" placeholder="Subject (Optinal)" /> {% endcomment %}
+                    {{ form.title }}
+                    {{ form.title.errors }}
+                </div>
+            </div>
+            <div class="col-md-12" data-aos="fade-up" data-aos-delay="200">
+                <div class="single-form m-0">
+                    {% comment %} <textarea placeholder="Message"></textarea> {% endcomment %}
+                    {{ form.content }}
+                    {{ form.content.errors }}
+                </div>
+            </div>
+            <div class="col-md-12" data-aos="fade-up" data-aos-delay="200">
+                <button class="btn btn-primary btn-hover-dark border-0 mt-30px" type="submit">Create Blog</button>
+            </div>
+        </div>
+    </div>
+</form>
+{% else %}
+<h4>You need to login in order to create a blog. <a href="{% url 'login' %}">Login</a></h4>
+{% endif %}
+{% endblock %}

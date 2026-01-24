@@ -36,6 +36,7 @@ class Product(AbstractModel):
     price = models.CharField(max_length=100)
     description = models.TextField(null=True, blank=True)
     cover_image = models.ImageField(upload_to='product_images/', null=True, blank=True)
+    slug = models.SlugField(null=True, blank=True)
 
     def __str__(self):
         return f'{self.category.title} / {self.title}'

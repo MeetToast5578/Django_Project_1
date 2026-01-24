@@ -40,7 +40,11 @@ def login(request):
         elif 'login' in request.POST:
             next = request.GET.get('next', reverse_lazy('home'))
             form2 = LoginForm(data = request.POST)
+            print(request.POST)
+            
+            print('post')
             if form2.is_valid():
+                print('valid')
                 user = authenticate(request, username = form2.cleaned_data['username'], password = form2.cleaned_data['password'])
                 django_login(request, user)
                 if not user:

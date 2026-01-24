@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ProductCategory, Product, ProductTag, ProductImage, ProductReview, ProductDiscount
+from .models import ProductCategory, Product, ProductTag, ProductImage, ProductReview, ProductDiscount, ProductColor, ProductSize
 
 # Register your models here.
 
@@ -9,6 +9,8 @@ admin.site.register(ProductTag)
 admin.site.register(ProductImage)
 admin.site.register(ProductReview)
 admin.site.register(ProductDiscount)
+admin.site.register(ProductColor)
+admin.site.register(ProductSize)
 
 
 class ProductImageInline(admin.TabularInline):

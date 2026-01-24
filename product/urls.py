@@ -1,8 +1,8 @@
 from django.urls import path
-from .views import compare, shop_left_sidebar, single_product
+from .views import ShopDetailView, compare, shop_left_sidebar, single_product, ShopListView
 
 urlpatterns = [
     path('compare/', compare, name='compare'),
-    path('shop-left-sidebar/', shop_left_sidebar, name='shop_left_sidebar'),
-    path('single-product/<int:pk>/', single_product, name='single_product'),
+    path('shop-left-sidebar/', ShopListView.as_view(), name='shop_left_sidebar'),
+    path('single-product/<str:slug>/', ShopDetailView.as_view(), name='single_product'),
 ]
