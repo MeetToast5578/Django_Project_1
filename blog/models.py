@@ -28,9 +28,6 @@ class BLog(AbstractModel):
 
 
 class Comment(AbstractModel):
-    name = models.CharField(max_length=200)
-    email = models.EmailField()
-    subject = models.CharField(max_length=200)
     message = models.TextField()
     blog = models.ForeignKey(BLog, related_name='comments', on_delete=models.CASCADE)
 
