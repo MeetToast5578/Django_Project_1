@@ -22,3 +22,10 @@ class Contact(AbstractModel):
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
+    
+    
+class Subscribe(AbstractModel):
+    email = models.EmailField('Email', unique=True, max_length=200, validators=[validate_gmail])
+
+    def __str__(self):
+        return self.email

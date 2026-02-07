@@ -1,0 +1,111 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-04 16:05+0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\core\templates\base.html:58
+msgid "Home"
+msgstr "Ana səhifə"
+
+#: .\core\templates\base.html:59
+msgid "About"
+msgstr "Haqqımızda"
+
+#: .\core\templates\base.html:60
+msgid "Pages"
+msgstr "Səhifələr"
+
+#: .\core\templates\base.html:64
+msgid "Inner Pages"
+msgstr "Daxili səhifələr"
+
+#: .\core\templates\base.html:65
+msgid "404 Page"
+msgstr "404 səhifəsi"
+
+#: .\core\templates\base.html:66
+msgid "Faq Page"
+msgstr "FAQ səhifəsi"
+
+#: .\core\templates\base.html:69
+msgid "Other Shop Pages"
+msgstr "Digər mağaza səhifələri"
+
+#: .\core\templates\base.html:70
+msgid "Cart Page"
+msgstr "Səbət səhifəsi"
+
+#: .\core\templates\base.html:71
+msgid "Checkout Page"
+msgstr "Ödəniş səhifəsi"
+
+#: .\core\templates\base.html:72
+msgid "Compare Page"
+msgstr "Müqayisə səhifəsi"
+
+#: .\core\templates\base.html:73
+msgid "Wishlist Page"
+msgstr "Arzu siyahısı"
+
+#: .\core\templates\base.html:76
+msgid "Related Shop Pages"
+msgstr "Əlaqəli mağaza səhifələri"
+
+#: .\core\templates\base.html:77
+msgid "Account Page"
+msgstr "Hesab səhifəsi"
+
+#: .\core\templates\base.html:78
+msgid "Login & Register Page"
+msgstr "Daxil ol / Qeydiyyat səhifəsi"
+
+#: .\core\templates\base.html:79
+msgid "Empty Cart Page"
+msgstr "Boş səbət səhifəsi"
+
+#: .\core\templates\base.html:80
+msgid "Thank You Page"
+msgstr "Təşəkkürlər səhifəsi"
+
+#: .\core\templates\base.html:92
+msgid "Shop"
+msgstr "Mağaza"
+
+#: .\core\templates\base.html:94
+msgid "Blog"
+msgstr "Blog"
+
+#: .\core\templates\base.html:96
+msgid "Contact"
+msgstr "Əlaqə"
+
+#: .\core\templates\base.html:98
+msgid "Logout"
+msgstr "Çıxış"
+
+#: .\core\templates\base.html:100
+msgid "Login"
+msgstr "Daxil ol"
+
+#: .\core\templates\base.html:103
+msgid "Language"
+msgstr "Dil"
+
+#: .\core\views.py:32
+msgid "Successfully Sent!"
+msgstr "Ugurla göndərildi!"

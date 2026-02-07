@@ -1,4 +1,4 @@
-{% load static %}
+{% load static i18n %}
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -55,29 +55,29 @@
                     <div class="col align-self-center d-none d-lg-block"> 
                         <div class="main-menu">
                             <ul>
-                                <li class="dropdown"><a href="{% url 'home' %}">Home </a></li>
-                                <li><a href="{% url 'about' %}">About</a></li>
-                                <li class="dropdown position-static"><a href="{% url 'about' %}">Pages <i class="fas fa-angle-down"></i></a>
+                                <li class="dropdown"><a href="{% url 'home' %}"> {% trans 'Home' %} </a></li>
+                                <li><a href="{% url 'about' %}">{% trans 'About' %}</a></li>
+                                <li class="dropdown position-static"><a href="{% url 'about' %}">{% trans 'Pages' %}<i class="fas fa-angle-down"></i></a>
                                     <ul class="mega-menu d-block">
                                         <li class="d-flex">
                                             <ul class="d-block">
-                                                <li class="title"><a href="#">Inner Pages</a></li>
-                                                <li><a href="{% url '404' %}">404 Page</a></li>
-                                                <li><a href="{% url 'faq' %}">Faq Page</a></li>
+                                                <li class="title"><a href="#">{% trans 'Inner Pages' %}</a></li>
+                                                <li><a href="{% url '404' %}">{% trans '404 Page' %}</a></li>
+                                                <li><a href="{% url 'faq' %}">{% trans 'Faq Page' %}</a></li>
                                             </ul>
                                             <ul class="d-block">
-                                                <li class="title"><a href="#">Other Shop Pages</a></li>
-                                                <li><a href="{% url 'cart' %}">Cart Page</a></li>
-                                                <li><a href="{% url 'checkout' %}">Checkout Page</a></li>
-                                                <li><a href="{% url 'compare' %}">Compare Page</a></li>
-                                                <li><a href="{% url 'wishlist' %}">Wishlist Page</a></li>
+                                                <li class="title"><a href="#">{% trans 'Other Shop Pages' %}</a></li>
+                                                <li><a href="{% url 'cart' %}">{% trans 'Cart Page' %}</a></li>
+                                                <li><a href="{% url 'checkout' %}">{% trans 'Checkout Page' %}</a></li>
+                                                <li><a href="{% url 'compare' %}">{% trans 'Compare Page' %}</a></li>
+                                                <li><a href="{% url 'wishlist' %}">{% trans 'Wishlist Page' %}</a></li>
                                             </ul>
                                             <ul class="d-block">
-                                                <li class="title"><a href="#">Related Shop Pages</a></li>
-                                                <li><a href="{% url 'my_account' %}">Account Page</a></li>
-                                                <li><a href="{% url 'login' %}">Login & Register Page</a></li>
-                                                <li><a href="{% url 'empty_cart' %}">Empty Cart Page</a></li>
-                                                <li><a href="#">Thank You Page</a></li>
+                                                <li class="title"><a href="#">{% trans 'Related Shop Pages' %}</a></li>
+                                                <li><a href="{% url 'my_account' %}">{% trans 'Account Page' %}</a></li>
+                                                <li><a href="{% url 'login' %}">{% trans 'Login & Register Page' %}</a></li>
+                                                <li><a href="{% url 'empty_cart' %}">{% trans 'Empty Cart Page' %}</a></li>
+                                                <li><a href="#">{% trans 'Thank You Page' %}</a></li>
                                             </ul>
                                             <ul class="d-flex align-items-center p-0 border-0">
                                                 <li>
@@ -89,16 +89,35 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="dropdown position-static"><a href="{% url 'shop_left_sidebar' %}">Shop </a>                                   
+                                <li class="dropdown position-static"><a href="{% url 'shop_left_sidebar' %}">{% trans 'Shop' %}</a>                                   
                                 </li>
-                                <li class="dropdown "><a href="{% url 'blog' %}">Blog</a>
+                                <li class="dropdown "><a href="{% url 'blog' %}">{% trans 'Blog' %}</a>
                                     
-                                    <li><a href="{% url 'contact' %}">Contact</a></li>
+                                    <li><a href="{% url 'contact' %}">{% trans 'Contact' %}</a></li>
                                     {% if request.user.is_authenticated %}
-                                    <li><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                                    <li><a class="nav-link" href="{% url 'logout' %}">{% trans 'Logout' %}</a></li>
                                     {% else %}
-                                    <li><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+                                    <li><a class="nav-link" href="{% url 'login' %}">{% trans 'Login' %}</a></li>
                                     {% endif %}
+                                <li class="dropdown">
+                                    <a href="#" class="language-toggle">{% trans 'Language' %}<i class="fas fa-angle-down"></i></a>
+                                    <ul class="dropdown-menu language-dropdown">
+                                        {% get_current_language as LANGUAGE_CODE %}
+                                        {% get_available_languages as LANGUAGES %}
+                                        {% get_language_info_list for LANGUAGES as languages %}
+                                        {% for language in languages %}
+                                        <li>
+                                            <form action="{% url 'set_language' %}" method="post" style="display:inline;">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="language" value="{{ language.code }}">
+                                                <button type="submit" class="dropdown-item" style="background:none; border:none; padding:0.5rem 1rem; text-align:left; cursor:pointer;">
+                                                    {{ language.name }}
+                                                </button>
+                                            </form>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -662,6 +681,32 @@
 
     <!-- Main Js -->
     <script src="{% static 'js/main.js' %}"></script>
+    
+    <style>
+        .language-dropdown {
+            display: none !important;
+        }
+        .dropdown:hover .language-dropdown {
+            display: block !important;
+        }
+    </style>
+    
+    <script>
+        // Prevent Bootstrap's dropdown from managing the language element
+        document.addEventListener('DOMContentLoaded', function() {
+            const langDropdown = document.querySelector('.language-dropdown');
+            langDropdown.classList.remove('show');
+            
+            const langToggle = document.querySelector('.language-toggle');
+            if (langToggle) {
+                langToggle.removeAttribute('data-bs-toggle');
+                langToggle.href = '#';
+                langToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>
