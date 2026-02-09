@@ -14,7 +14,9 @@ from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIV
 class SubscriberAPIView(CreateAPIView):
     serializer_class = SubscribeSerializer
     queryset = Subscribe.objects.all()
-
+    
+    
+@api_view(http_method_names=["GET"])
 def categories(request):
     categories = ProductCategory.objects.all()
     serializer = ProductCategorySerializer(categories, many = True)
@@ -73,6 +75,11 @@ def product_update(request, pk):
         return JsonResponse(data=serializer.errors, safe=False, status=400)
     serializer = ProductSerializer(products, context={"request": request}, many=True)
     return JsonResponse(data=serializer.data, safe=False)
+
+
+class CategoryListApiView(ListCreateAPIView):
+    serializer_class = ProductCategorySerializer
+    queryset = ProductCategory.objects.all()
 
 
 class ProductListAPIView(ListCreateAPIView):
