@@ -1,25 +1,32 @@
-from product.models import ProductCategory, Product
+from product.models import ProductCategory, Product, ProductTag
 from core.models import Subscribe
 from django.http import JsonResponse
 from product.api.serializers import (
     ProductCategorySerializer,
     ProductSerializer,
     ProductCreateSerializer,
+    ProductTagSerializer,
     SubscribeSerializer,
 )
 from rest_framework.decorators import api_view
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, CreateAPIView
+from rest_framework.generics import (
+    ListCreateAPIView,
+    RetrieveUpdateDestroyAPIView,
+    CreateAPIView,
+    ListAPIView,
+)
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+
 
 class SubscriberAPIView(CreateAPIView):
     serializer_class = SubscribeSerializer
     queryset = Subscribe.objects.all()
-    
-    
+
+
 @api_view(http_method_names=["GET"])
 def categories(request):
     categories = ProductCategory.objects.all()
-    serializer = ProductCategorySerializer(categories, many = True)
+    serializer = ProductCategorySerializer(categories, many=True)
     # category_dict = []
     # for category in categories:
     #     if category.parent:
@@ -37,8 +44,7 @@ def categories(request):
     #                 'title': category.title
     #             }
     #         )
-    return JsonResponse(data = serializer.data, safe= False)
-
+    return JsonResponse(data=serializer.data, safe=False)
 
 
 @api_view(http_method_names=["GET", "POST"])
@@ -80,6 +86,11 @@ def product_update(request, pk):
 class CategoryListApiView(ListCreateAPIView):
     serializer_class = ProductCategorySerializer
     queryset = ProductCategory.objects.all()
+
+
+class ProductTagListAPIView(ListAPIView):
+    serializer_class = ProductTagSerializer
+    queryset = ProductTag.objects.all()
 
 
 class ProductListAPIView(ListCreateAPIView):
