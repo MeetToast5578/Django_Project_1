@@ -24,6 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('product.api.urls')),
     path('api-auth/', include('rest_framework.urls')),
+    path('auth/', include('account.api.urls')),
+    
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += i18n_patterns(
@@ -42,3 +44,5 @@ if settings.DEBUG:
 
 # Custom error handlers
 handler404 = 'core.views.error_404_view'
+
+
