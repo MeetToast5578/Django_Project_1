@@ -33,7 +33,7 @@ class Product(AbstractModel):
     tags = models.ManyToManyField(ProductTag, related_name='products')
 
     title = models.CharField(max_length=200)
-    price = models.CharField(max_length=100)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.TextField(null=True, blank=True)
     cover_image = models.ImageField(upload_to='product_images/', null=True, blank=True)
     slug = models.SlugField(null=True, blank=True)

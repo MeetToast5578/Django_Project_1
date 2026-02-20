@@ -190,7 +190,7 @@
                                                             <span class="new">${{ product.price }}</span>
                                                         </span>
                                                     </div>
-                                                    <button title="Add To Cart" class=" add-to-cart">Add
+                                                    <button title="Add To Cart" class=" add-to-cart" data-product="{{ product.id }}" data-action="add">Add
                                                         To Cart</button>
                                                 </div>
                                             </div>
@@ -245,7 +245,7 @@
                                                                 <a href="compare.html" class="action compare"
                                                                     title="Compare"><i class="fas fa-sync"></i></a>
                                                             </div>
-                                                            <button title="Add To Cart" class=" add-to-cart">Add
+                                                            <button title="Add To Cart" class=" add-to-cart" data-product="{{ product.id }}" data-action="add">Add
                                                                 To Cart</button>
                                                         </div>
                                                     </div>
@@ -369,3 +369,7 @@
 
 {% endblock %}
 
+
+{% block extra_js %}
+   
+{% endblock %}

@@ -217,33 +217,16 @@
 
             <div class="body customScroll">
                 <ul class="minicart-product-list">
+                    {% for item in basket.items.all %}
                     <li>
-                        <a href="#" class="image"><img src="{% static 'images/product-image/1.jpg' %}"
-                                alt="Cart product Image"></a>
+                        <a href="#" class="image"><img src="{{ item.product.cover_image.url }}" alt="Cart product Image"></a>
                         <div class="content">
-                            <a href="#" class="title">Hand-Made Garlic Mortar</a>
-                            <span class="quantity-price">1 x <span class="amount">$18.86</span></span>
-                            <a href="#" class="remove">×</a>
+                            <a href="#" class="title">{{ item.product.title }}</a>
+                            <span class="quantity-price">{{ item.quantity }} x <span class="amount">${{ item.total_price }}</span></span>
+                            <a href="#" class="remove add-to-cart" data-product="{{ item.product.id }}" data-action="delete">×</a>
                         </div>
                     </li>
-                    <li>
-                        <a href="#" class="image"><img src="{% static 'images/product-image/2.jpg' %}"
-                                alt="Cart product Image"></a>
-                        <div class="content">
-                            <a href="#" class="title">Handmade Ceramic Pottery</a>
-                            <span class="quantity-price">1 x <span class="amount">$43.28</span></span>
-                            <a href="#" class="remove">×</a>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="#" class="image"><img src="{% static 'images/product-image/3.jpg' %}"
-                                alt="Cart product Image"></a>
-                        <div class="content">
-                            <a href="#" class="title">Hand Painted Bowls</a>
-                            <span class="quantity-price">1 x <span class="amount">$37.34</span></span>
-                            <a href="#" class="remove">×</a>
-                        </div>
-                    </li>
+                    {% endfor %}
                 </ul>
             </div>
             <div class="foot">
@@ -721,6 +704,8 @@
     <script src="{% static 'js/vendor/vendor.min.js' %}"></script>
     <script src="{% static 'js/plugins/plugins.min.js' %}"></script>
     <script src="{% static 'js/subscriber.js' %}"></script>
+    <script src="{% static 'js/cart.js' %}"></script>
+
 
     <!-- Main Js -->
     <script src="{% static 'js/main.js' %}"></script>
@@ -750,6 +735,9 @@
             }
         });
     </script>
+
+    {% block extra_js %}
+    {% endblock %}
 </body>
 
 </html>

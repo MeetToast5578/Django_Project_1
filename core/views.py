@@ -3,18 +3,24 @@ from django.urls import reverse_lazy
 from core.forms import ContactForm
 from django.contrib import messages
 from product.models import Product, ProductCategory
+from order.models import Basket, BasketItem
 from django.views.generic import CreateView
 from django.utils.translation import gettext_lazy as _
 # Create your views here.
 
 
 def homepage(request):
+    if request.user.is_authenticated:
+        basket = Basket.objects.filter(user = request.user, is_active = True).first()
+    else:
+        basket = None
     products = Product.objects.all() # Django ORM 
     categories = ProductCategory.objects.filter(parent = None)
     
     context = {
         'products' : products,
-        'categories' : categories
+        'categories' : categories,
+        'basket' : basket,
     }
     return render(request, 'index.html', context)
 
