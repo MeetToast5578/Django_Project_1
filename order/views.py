@@ -25,7 +25,7 @@ def update_item(request):
         else:
             basketItem.quantity += 1
 
-    if action == 'remove':
+    if action == 'remove' and basketItem.quantity > 1:
         basketItem.quantity -= 1
 
     basketItem.save()

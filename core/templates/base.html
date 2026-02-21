@@ -222,7 +222,7 @@
                         <a href="#" class="image"><img src="{{ item.product.cover_image.url }}" alt="Cart product Image"></a>
                         <div class="content">
                             <a href="#" class="title">{{ item.product.title }}</a>
-                            <span class="quantity-price">{{ item.quantity }} x <span class="amount">${{ item.total_price }}</span></span>
+                            <span class="quantity-price">{{ item.quantity }} x <span class="amount">${{ item.product.price }}</span></span>
                             <a href="#" class="remove add-to-cart" data-product="{{ item.product.id }}" data-action="delete">×</a>
                         </div>
                     </li>
