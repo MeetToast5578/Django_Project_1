@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
@@ -174,11 +175,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'alizadeyunus@gmail.com'
-EMAIL_HOST_PASSWORD = 'adenium5578'
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = "g.heyderov@gmail.com"
+EMAIL_HOST_PASSWORD = "jbuq ndrv dpht myaj"
 EMAIL_PORT = 587
-
 
 
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
@@ -198,3 +198,11 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),    
     "TOKEN_OBTAIN_SERIALIZER": "account.api.serializers.UserTokenObtainPairSerializer",
 }
+
+
+
+
+CELERY_BROKER_URL = "redis://localhost:6379"
+CELERY_RESULT_BACKEND = "redis://localhost:6379"
+CELERY_WORKER_POOL = "solo"
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import error_404_view, faq, homepage, about, contact, ContactView
+from .views import error_404_view, faq, homepage, about, contact, ContactView, export_view
 
 
 urlpatterns = [
@@ -8,4 +8,5 @@ urlpatterns = [
     path('contact/', ContactView.as_view(), name='contact'),
     path('faq/', faq, name='faq'),
     path('404/', error_404_view, name='404'),
+    path('export/', export_view, name='export'),
 ]

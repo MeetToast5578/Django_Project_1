@@ -79,13 +79,15 @@
         <div class="header">🛍️ Latest Products Just for You!</div>
 
         <!-- Product 1 -->
+        {% for product in products %}
         <div class="product-card">
-            <img src="https://via.placeholder.com/250" alt="Product 1">
-            <div class="product-title">Product 1</div>
-            <div class="product-description">This is a short description of Product 1.</div>
-            <a href="#" class="cta-button">View Product</a>
+            <img src="http://127.0.0.1:8000{{product.cover_image.url}}" alt="{{ product.title }}">
+            <div class="product-title">{{ product.title }}</div>
+            <div class="product-description">{{ product.description }}</div>
+            <a href="http://127.0.0.1:8000{% url 'single_product' product.slug %}" class="cta-button">View Product</a>
         </div>
-
+        {% endfor %}
+{% comment %} 
         <!-- Product 2 -->
         <div class="product-card">
             <img src="https://via.placeholder.com/250" alt="Product 2">
@@ -100,7 +102,7 @@
             <div class="product-title">Product 3</div>
             <div class="product-description">This is a short description of Product 3.</div>
             <a href="#" class="cta-button">View Product</a>
-        </div>
+        </div> {% endcomment %}
 
         <div class="footer">
             <p>You're receiving this email because you subscribed to our newsletter.</p>

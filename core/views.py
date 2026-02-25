@@ -1,13 +1,21 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from core.forms import ContactForm
 from django.contrib import messages
+from core.tasks import export
 from product.models import Product, ProductCategory
 from order.models import Basket, BasketItem
 from django.views.generic import CreateView
 from django.utils.translation import gettext_lazy as _
 # Create your views here.
 
+
+
+
+def export_view(request):
+    export.delay()
+    return HttpResponse('Export Done!')
 
 def homepage(request):
     if request.user.is_authenticated:
