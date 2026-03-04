@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from account.forms import RegisterForm, LoginForm, ProfileForm
+from account.forms import RegisterForm, LoginForm, ProfileForm, AddressForm
+from account.models import Address
 from django.contrib.auth import authenticate, login as django_login, logout as django_logout
 from django.contrib.auth.decorators import login_required
 
@@ -13,6 +14,7 @@ from django.utils.encoding import force_bytes
 
 
 from product.models import Product, WishList, WishListItem
+from order.models import Basket
 from django.http import JsonResponse
 import json
 
@@ -81,14 +83,61 @@ def activate(request, uidb64, token):
     
 @login_required(login_url='login')
 def my_account(request):
+    # Ensure user has an address object
+    address, _ = Address.objects.get_or_create(user=request.user)
+
+    form = ProfileForm(instance=request.user)
+    address_form = AddressForm(instance=address)
+
+    # Wishlist preview
+    wishlist = WishList.objects.filter(user=request.user).prefetch_related('items__product').first()
+    recent_wishlist_items = []
+    if wishlist:
+        recent_wishlist_items = wishlist.items.select_related('product').order_by('-created_at')[:4]
+
+    # Active basket summary
+    basket = Basket.objects.filter(user=request.user, is_active=True).prefetch_related('items__product').first()
+
     if request.method == 'POST':
-        form = ProfileForm(data=request.POST, instance=request.user)
-        if form.is_valid():
-            form.save()
-    else:
-        form = ProfileForm(instance=request.user)
+        # Determine which form was submitted
+        if 'profile_submit' in request.POST:
+            form = ProfileForm(request.POST, request.FILES, instance=request.user)
+            address_form = AddressForm(instance=address)
+            if form.is_valid():
+                form.save()
+        elif 'address_submit' in request.POST:
+            form = ProfileForm(instance=request.user)
+            address_form = AddressForm(request.POST, instance=address)
+            if address_form.is_valid():
+                address_form.save()
+
+    # Profile completion progress
+    user = request.user
+    profile_fields = {
+        'First name': bool(user.first_name),
+        'Last name': bool(user.last_name),
+        'Email': bool(user.email),
+        'Phone': bool(user.phone),
+        'Profile image': bool(user.profile_image),
+        'Street address': bool(address.street),
+        'City': bool(address.city),
+        'State': bool(address.state),
+        'ZIP': bool(address.zip_code),
+        'Country': bool(address.country),
+    }
+    total_fields = len(profile_fields)
+    completed_fields = sum(1 for v in profile_fields.values() if v)
+    profile_completion = int((completed_fields / total_fields) * 100) if total_fields else 0
+    missing_profile_fields = [name for name, ok in profile_fields.items() if not ok]
     context = {
-        'form': form
+        'form': form,
+        'address_form': address_form,
+        'address': address,
+        'wishlist': wishlist,
+        'recent_wishlist_items': recent_wishlist_items,
+        'basket': basket,
+        'profile_completion': profile_completion,
+        'missing_profile_fields': missing_profile_fields,
     }
     return render(request, 'my-account.html', context)
 

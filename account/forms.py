@@ -1,14 +1,12 @@
 from django import forms
 from django.contrib.auth import get_user_model
+from .models import Address
+
 User = get_user_model()
 
 
 
 class ProfileForm(forms.ModelForm):
-
-    fullname = forms.CharField(max_length=200, widget= forms.TextInput(attrs={
-        'class' : 'form-control'
-    }))
 
     class Meta:
         model = User
@@ -20,21 +18,39 @@ class ProfileForm(forms.ModelForm):
             'profile_image',
         ]
         widgets = {
-            'email' : forms.EmailInput(attrs={
-                'class' : 'form-control'
+            'first_name': forms.TextInput(attrs={
+                'class': 'form-control'
             }),
-            'phone' : forms.TextInput(attrs={
-                'class' : 'form-control'
+            'last_name': forms.TextInput(attrs={
+                'class': 'form-control'
+            }),
+            'email': forms.EmailInput(attrs={
+                'class': 'form-control'
+            }),
+            'phone': forms.TextInput(attrs={
+                'class': 'form-control'
             }),
         }
 
-    def save(self, commit = ...):
-        user = super().save(commit)
-        first_name = self.cleaned_data['fullname'].split()[0]
-        last_name = self.cleaned_data['fullname'].split()[1]
-        self.instance.first_name = first_name
-        self.instance.last_name = last_name
-        user.save()
+
+class AddressForm(forms.ModelForm):
+
+    class Meta:
+        model = Address
+        fields = [
+            'street',
+            'city',
+            'state',
+            'zip_code',
+            'country',
+        ]
+        widgets = {
+            'street': forms.TextInput(attrs={'class': 'form-control'}),
+            'city': forms.TextInput(attrs={'class': 'form-control'}),
+            'state': forms.TextInput(attrs={'class': 'form-control'}),
+            'zip_code': forms.TextInput(attrs={'class': 'form-control'}),
+            'country': forms.TextInput(attrs={'class': 'form-control'}),
+        }
 
 class LoginForm(forms.Form):
 

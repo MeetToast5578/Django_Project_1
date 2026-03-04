@@ -3,13 +3,14 @@
 {% block title %}
     <title>My Account</title>
 {% endblock %}
+
 {% block content %}
     <!-- breadcrumb-area start -->
     <div class="breadcrumb-area">
         <div class="container">
             <div class="row align-items-center justify-content-center">
                 <div class="col-12 text-center">
-                    <h2 class="breadcrumb-title">Account</h2>
+                    <h2 class="breadcrumb-title">Account</h2> 
                     <!-- breadcrumb-list start -->
                     <ul class="breadcrumb-list">
                         <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -30,16 +31,34 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 col-md-3 col-lg-3">
+                    <!-- Profile card -->
+                    <div class="profile-card text-center mb-4 p-3 border rounded d-flex flex-column align-items-center" >
+                        <div class="profile-avatar mb-3">
+                            <img src="{{ request.user.get_profile_image }}"
+                                 alt="{{ request.user.get_full_name|default:request.user.username }}"
+                                 class="img-fluid" style="max-width: 140px;">
+                        </div>
+                        <h5 class="mb-1">
+                            {{ request.user.get_full_name|default:request.user.username }}
+                        </h5>
+                        <p class="text-muted mb-2" style="font-size: 0.9rem;">
+                            {{ request.user.email }}
+                        </p>
+                        
+                        <button id="btn-address-edit" class="btn btn-sm btn-outline-dark" type="button" >
+                                        Edit Profile
+                                    </button>
+                    </div>
+
                     <!-- Nav tabs -->
                     <div class="dashboard_tab_button" data-aos="fade-up" data-aos-delay="0">
                         <ul role="tablist" class="nav flex-column dashboard-list">
                             <li><a href="#dashboard" data-bs-toggle="tab" class="nav-link active">Dashboard</a></li>
-                            <li> <a href="#orders" data-bs-toggle="tab" class="nav-link">Orders</a></li>
+                            <li><a href="#orders" data-bs-toggle="tab" class="nav-link">Orders</a></li>
                             <li><a href="#downloads" data-bs-toggle="tab" class="nav-link">Downloads</a></li>
                             <li><a href="#address" data-bs-toggle="tab" class="nav-link">Addresses</a></li>
-                            <li><a href="#account-details" data-bs-toggle="tab" class="nav-link">Account details</a>
-                            </li>
-                            <li><a href="{% url 'logout' %}" class="nav-link">logout</a></li>
+                            <li><a href="#account-details" data-bs-toggle="tab" class="nav-link">Account details</a></li>
+                            <li><a href="{% url 'logout' %}" class="nav-link">Logout</a></li>
                         </ul>
                     </div>
                 </div>
@@ -47,10 +66,124 @@
                     <!-- Tab panes -->
                     <div class="tab-content dashboard_content" data-aos="fade-up" data-aos-delay="200">
                         <div class="tab-pane fade show active" id="dashboard">
-                            <h4>Dashboard </h4>
-                            <p>From your account dashboard. you can easily check &amp; view your <a href="#">recent
-                                    orders</a>, manage your <a href="#">shipping and billing addresses</a> and <a
-                                    href="#">Edit your password and account details.</a></p>
+                            <h4>Dashboard</h4>
+
+                            <div class="row">
+                                <!-- Left column: overview & progress -->
+                                <div class="col-lg-7 col-md-12">
+                                    <!-- Profile completion -->
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-2">Profile completion</h5>
+                                            <div class="progress" style="height: 10px;">
+                                                <div class="progress-bar" role="progressbar"
+                                                     style="width: {{ profile_completion }}%;"
+                                                     aria-valuenow="{{ profile_completion }}" aria-valuemin="0"
+                                                     aria-valuemax="100">
+                                                </div>
+                                            </div>
+                                            <p class="mt-2 mb-1" style="font-size: 0.9rem;">
+                                                {{ profile_completion }}% complete
+                                            </p>
+                                            {% if missing_profile_fields %}
+                                                <p class="mb-0" style="font-size: 0.85rem;">
+                                                    Complete your profile: 
+                                                    {{ missing_profile_fields|join:", " }}.
+                                                </p>
+                                            {% else %}
+                                                <p class="mb-0" style="font-size: 0.85rem;">
+                                                    Your profile is fully complete.
+                                                </p>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+                                    <!-- Address summary -->
+                                    <div class="card mb-4">
+                                        <div class="card-body d-flex justify-content-between align-items-start">
+                                            <div>
+                                                <h5 class="card-title mb-2">Billing address</h5>
+                                                <p class="mb-1" style="font-size: 0.9rem;">
+                                                    {{ address.street|default:"Street not set" }}
+                                                </p>
+                                                <p class="mb-1" style="font-size: 0.9rem;">
+                                                    {{ address.city|default:"City not set" }}{% if address.state %}, {{ address.state }}{% endif %}
+                                                </p>
+                                                <p class="mb-1" style="font-size: 0.9rem;">
+                                                    {{ address.zip_code|default:"ZIP not set" }}{% if address.country %}, {{ address.country }}{% endif %}
+                                                </p>
+                                            </div>
+                                            <a href="#address" data-bs-toggle="tab" class="btn btn-sm btn-outline-dark">
+                                                Manage
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <!-- Current cart summary -->
+                                    <div class="card mb-4">
+                                        <div class="card-body d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h5 class="card-title mb-1">Current cart</h5>
+                                                {% if basket %}
+                                                    <p class="mb-1" style="font-size: 0.9rem;">
+                                                        {{ basket.items.count }} item{{ basket.items.count|pluralize }} in your cart.
+                                                    </p>
+                                                    <p class="mb-0" style="font-size: 0.9rem;">
+                                                        Estimated total: <strong>${{ basket.price }}</strong>
+                                                    </p>
+                                                {% else %}
+                                                    <p class="mb-0" style="font-size: 0.9rem;">
+                                                        Your cart is empty.
+                                                    </p>
+                                                {% endif %}
+                                            </div>
+                                            <a href="{% url 'cart' %}" class="btn btn-sm btn-outline-dark">
+                                                Go to cart
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Right column: wishlist preview -->
+                                <div class="col-lg-5 col-md-12">
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                <h5 class="card-title mb-0">Wishlist</h5>
+                                                <a href="{% url 'wishlist' %}" class="btn btn-sm btn-outline-dark">
+                                                    View all
+                                                </a>
+                                            </div>
+
+                                            {% if recent_wishlist_items %}
+                                                <ul class="list-group list-group-flush">
+                                                    {% for item in recent_wishlist_items %}
+                                                        <li class="list-group-item px-0">
+                                                            <div class="d-flex align-items-center">
+                                                                <a href="{% url 'single_product' item.product.slug %}" class="me-3" style="width: 50px; height: 50px; overflow: hidden; display: inline-block;">
+                                                                    <img src="{{ item.product.cover_image.url }}" alt="{{ item.product.title }}" class="img-fluid" style="object-fit: cover; width: 100%; height: 100%;">
+                                                                </a>
+                                                                <div class="flex-grow-1">
+                                                                    <a href="{% url 'single_product' item.product.slug %}" style="display: block; font-size: 0.9rem; font-weight: 500;">
+                                                                        {{ item.product.title }}
+                                                                    </a>
+                                                                    <span style="font-size: 0.85rem; color: #666;">
+                                                                        ${{ item.product.price }}
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            {% else %}
+                                                <p class="mb-0" style="font-size: 0.9rem;">
+                                                    You don't have any items in your wishlist yet.
+                                                </p>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="tab-pane fade" id="orders">
                             <h4>Orders</h4>
@@ -114,81 +247,207 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="address">
-                            <p>The following addresses will be used on the checkout page by default.</p>
-                            <h5 class="billing-address">Billing address</h5>
-                            <a href="#" class="view">Edit</a>
-                            <p class="mb-2"><strong>Michael M Hoskins</strong></p>
-                            <address>
-                                <span class="mb-1 d-inline-block"><strong>City:</strong> Seattle</span>,
-                                <br>
-                                <span class="mb-1 d-inline-block"><strong>State:</strong> Washington(WA)</span>,
-                                <br>
-                                <span class="mb-1 d-inline-block"><strong>ZIP:</strong> 98101</span>,
-                                <br>
-                                <span><strong>Country:</strong> USA</span>
-                            </address>
+                            <!-- View mode -->
+                            <div id="address-view">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h3 class="mb-0">Addresses</h3>
+                                    <button id="btn-address-edit" class="btn btn-sm btn-outline-dark" type="button">
+                                        Edit
+                                    </button>
+                                </div>
+
+                                <p>The following address will be used on the checkout page by default.</p>
+                                <h5 class="billing-address">Billing address</h5>
+
+                                <div class="card">
+                                    <div class="card-body">
+                                        <p class="mb-1">
+                                            <strong>Street:</strong>
+                                            {{ address.street|default:"Not set" }}
+                                        </p>
+                                        <p class="mb-1">
+                                            <strong>City:</strong>
+                                            {{ address.city|default:"Not set" }}
+                                        </p>
+                                        <p class="mb-1">
+                                            <strong>State:</strong>
+                                            {{ address.state|default:"Not set" }}
+                                        </p>
+                                        <p class="mb-1">
+                                            <strong>ZIP:</strong>
+                                            {{ address.zip_code|default:"Not set" }}
+                                        </p>
+                                        <p class="mb-1">
+                                            <strong>Country:</strong>
+                                            {{ address.country|default:"Not set" }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Edit mode -->
+                            <div id="address-edit" class="d-none">
+                                <div class="login">
+                                    <div class="login_form_container">
+                                        <div class="account_login_form">
+                                            <form method="post" action="">
+                                                {% csrf_token %}
+
+                                                <h5 class="mb-3">Edit billing address</h5>
+
+                                                <div class="default-form-box mb-20">
+                                                    <label for="{{ address_form.street.id_for_label }}">Street</label>
+                                                    {{ address_form.street }}
+                                                    {% if address_form.street.errors %}
+                                                        <div class="text-danger small">{{ address_form.street.errors }}</div>
+                                                    {% endif %}
+                                                </div>
+
+                                                <div class="default-form-box mb-20">
+                                                    <label for="{{ address_form.city.id_for_label }}">City</label>
+                                                    {{ address_form.city }}
+                                                    {% if address_form.city.errors %}
+                                                        <div class="text-danger small">{{ address_form.city.errors }}</div>
+                                                    {% endif %}
+                                                </div>
+
+                                                <div class="default-form-box mb-20">
+                                                    <label for="{{ address_form.state.id_for_label }}">State</label>
+                                                    {{ address_form.state }}
+                                                    {% if address_form.state.errors %}
+                                                        <div class="text-danger small">{{ address_form.state.errors }}</div>
+                                                    {% endif %}
+                                                </div>
+
+                                                <div class="default-form-box mb-20">
+                                                    <label for="{{ address_form.zip_code.id_for_label }}">ZIP / Postcode</label>
+                                                    {{ address_form.zip_code }}
+                                                    {% if address_form.zip_code.errors %}
+                                                        <div class="text-danger small">{{ address_form.zip_code.errors }}</div>
+                                                    {% endif %}
+                                                </div>
+
+                                                <div class="default-form-box mb-20">
+                                                    <label for="{{ address_form.country.id_for_label }}">Country</label>
+                                                    {{ address_form.country }}
+                                                    {% if address_form.country.errors %}
+                                                        <div class="text-danger small">{{ address_form.country.errors }}</div>
+                                                    {% endif %}
+                                                </div>
+
+                                                <div class="mt-3 d-flex gap-2">
+                                                    <button class="btn btn-primary" type="submit" name="address_submit">Save address</button>
+                                                    <button class="btn btn-outline-secondary" type="button" id="btn-address-cancel">
+                                                        Cancel
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="tab-pane fade" id="account-details">
-                            <h3>Account details </h3>
-                            <div class="login">
-                                <div class="login_form_container">
-                                    <div class="account_login_form">
-                                        <form action="#">
-                                            <p>Already have an account? <a href="#" data-bs-toggle="modal"
-                                                    data-bs-target="#loginActive">Log in instead!</a></p>
-                                            <div class="input-radio">
-                                                <span class="custom-radio"><input type="radio" value="1"
-                                                        name="id_gender"> Mr.</span>
-                                                <span class="custom-radio"><input type="radio" value="1"
-                                                        name="id_gender"> Mrs.</span>
-                                            </div> <br>
-                                            <div class="default-form-box mb-20">
-                                                <label>First Name</label>
-                                                {% comment %} <input type="text" name="first-name"> {% endcomment %}
-                                                {{ request.user.first_name }}
-                                            </div>
-                                            <div class="default-form-box mb-20">
-                                                <label>Last Name</label>
-                                                {% comment %} <input type="text" name="last-name"> {% endcomment %}
-                                                {{ request.user.last_name }}
-                                            </div>
-                                            <div class="default-form-box mb-20">
-                                                <label>Email</label>
-                                                {% comment %} <input type="text" name="email-name"> {% endcomment %}
-                                                {{ request.user.email }}
-                                            </div>
-                                            <div class="default-form-box mb-20">
-                                                <label>Phone Number</label>
-                                                {% comment %} <input type="text" name="phone-number"> {% endcomment %}
-                                                {{ request.user.phone }}
-                                            </div>
-                                            <div class="default-form-box mb-20">
-                                                <label>Password</label>
-                                                <input type="password" name="user-password">
-                                            </div>
-                                            <div class="default-form-box mb-20">
-                                                <label>Birthdate</label>
-                                                <input type="date" name="birthday">
-                                            </div>
-                                            <span class="example">
-                                                (E.g.: 05/31/1970)
-                                            </span>
-                                            <br>
-                                            <label class="checkbox-default" for="offer">
-                                                <input type="checkbox" id="offer">
-                                                <span>Receive offers from our partners</span>
-                                            </label>
-                                            <br>
-                                            <label class="checkbox-default checkbox-default-more-text" for="newsletter">
-                                                <input type="checkbox" id="newsletter">
-                                                <span>Sign up for our newsletter<br><em>You may unsubscribe at any
-                                                        moment. For that purpose, please find our contact info in the
-                                                        legal notice.</em></span>
-                                            </label>
-                                            <div class="save_button mt-3">
-                                                <button class="btn" type="submit">Save</button>
-                                            </div>
-                                        </form>
+                            <!-- View mode -->
+                            <div id="account-details-view">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h3 class="mb-0">Account details</h3>
+                                    <button id="btn-account-edit" class="btn btn-sm btn-outline-dark" type="button">
+                                        Edit
+                                    </button>
+                                </div>
+
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Personal information</h5>
+                                        <p class="mb-1">
+                                            <strong>First name:</strong>
+                                            {{ form.instance.first_name|default:"Not set" }}
+                                        </p>
+                                        <p class="mb-1">
+                                            <strong>Last name:</strong>
+                                            {{ form.instance.last_name|default:"Not set" }}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Contact details</h5>
+                                        <p class="mb-1">
+                                            <strong>Email:</strong>
+                                            {{ form.instance.email|default:"Not set" }}
+                                        </p>
+                                        <p class="mb-1">
+                                            <strong>Phone:</strong>
+                                            {{ form.instance.phone|default:"Not set" }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Edit mode -->
+                            <div id="account-details-edit" class="d-none">
+                                <div class="login">
+                                    <div class="login_form_container">
+                                        <div class="account_login_form">
+                                            <form method="post" action="" enctype="multipart/form-data">
+                                                {% csrf_token %}
+
+                                                <!-- Basic info -->
+                                                <h5 class="mb-3">Personal information</h5>
+
+                                                <div class="default-form-box mb-20">
+                                                    <label for="{{ form.first_name.id_for_label }}">First Name</label>
+                                                    {{ form.first_name }}
+                                                    {% if form.first_name.errors %}
+                                                        <div class="text-danger small">{{ form.first_name.errors }}</div>
+                                                    {% endif %}
+                                                </div>
+
+                                                <div class="default-form-box mb-20">
+                                                    <label for="{{ form.last_name.id_for_label }}">Last Name</label>
+                                                    {{ form.last_name }}
+                                                    {% if form.last_name.errors %}
+                                                        <div class="text-danger small">{{ form.last_name.errors }}</div>
+                                                    {% endif %}
+                                                </div>
+
+                                                <!-- Contact info -->
+                                                <h5 class="mb-3 mt-4">Contact details</h5>
+
+                                                <div class="default-form-box mb-20">
+                                                    <label for="{{ form.email.id_for_label }}">Email</label>
+                                                    {{ form.email }}
+                                                    {% if form.email.errors %}
+                                                        <div class="text-danger small">{{ form.email.errors }}</div>
+                                                    {% endif %}
+                                                </div>
+
+                                                <div class="default-form-box mb-20">
+                                                    <label for="{{ form.phone.id_for_label }}">Phone Number</label>
+                                                    {{ form.phone }}
+                                                    {% if form.phone.errors %}
+                                                        <div class="text-danger small">{{ form.phone.errors }}</div>
+                                                    {% endif %}
+                                                </div>
+
+                                                <div class="default-form-box mb-20">
+                                                    <label for="{{ form.profile_image.id_for_label }}">Profile Image</label>
+                                                    {{ form.profile_image }}
+                                                    {% if form.profile_image.errors %}
+                                                        <div class="text-danger small">{{ form.profile_image.errors }}</div>
+                                                    {% endif %}
+                                                </div>
+
+                                                <div class="mt-3 d-flex gap-2">
+                                                    <button class="btn btn-primary" type="submit" name="profile_submit">Save changes</button>
+                                                    <button class="btn btn-outline-secondary" type="button" id="btn-account-cancel">
+                                                        Cancel
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -200,6 +459,67 @@
     </div>
     <!-- account area start -->
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const viewSection = document.getElementById('account-details-view');
+            const editSection = document.getElementById('account-details-edit');
+            const editBtn = document.getElementById('btn-account-edit');
+            const cancelBtn = document.getElementById('btn-account-cancel');
+
+            const addressView = document.getElementById('address-view');
+            const addressEdit = document.getElementById('address-edit');
+            const addressEditBtn = document.getElementById('btn-address-edit');
+            const addressCancelBtn = document.getElementById('btn-address-cancel');
+
+            function showEdit() {
+                if (!viewSection || !editSection) return;
+                viewSection.classList.add('d-none');
+                editSection.classList.remove('d-none');
+            }
+
+            function showView() {
+                if (!viewSection || !editSection) return;
+                editSection.classList.add('d-none');
+                viewSection.classList.remove('d-none');
+            }
+
+            if (editBtn) {
+                editBtn.addEventListener('click', function () {
+                    showEdit();
+                });
+            }
+
+            if (cancelBtn) {
+                cancelBtn.addEventListener('click', function () {
+                    showView();
+                });
+            }
+
+            function showAddressEdit() {
+                if (!addressView || !addressEdit) return;
+                addressView.classList.add('d-none');
+                addressEdit.classList.remove('d-none');
+            }
+
+            function showAddressView() {
+                if (!addressView || !addressEdit) return;
+                addressEdit.classList.add('d-none');
+                addressView.classList.remove('d-none');
+            }
+
+            if (addressEditBtn) {
+                addressEditBtn.addEventListener('click', function () {
+                    showAddressEdit();
+                });
+            }
+
+            if (addressCancelBtn) {
+                addressCancelBtn.addEventListener('click', function () {
+                    showAddressView();
+                });
+            }
+        });
+    </script>
 
 {% endblock %}
 
