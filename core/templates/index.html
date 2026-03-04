@@ -167,21 +167,22 @@
                         <!-- 1st tab start -->
                         <div class="tab-pane fade show active" id="tab-jewelry">
                             <div class="row">
+                                {% for product in products %}
                                 <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
                                     <!-- Single Prodect -->
                                     <div class="product">
                                         <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/1.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/1.jpg' %}"
+                                            <a href="{% url 'single_product' product.slug %}" class="image">
+                                                <img src="{{ product.cover_image.url}}" alt="Product" />
+                                                <img class="hover-image" src="{{ product.cover_image.url}}"
                                                     alt="Product" />
                                             </a>
                                             <span class="badges">
                                                 <span class="new">New</span>
                                             </span>
                                             <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
+                                                <button title="Add To Wishlist" class="action wishlist add-to-wishlist" 
+                                                            data-product="{{ product.id }}" data-action="add"><i class="fas fa-heart"></i></button>
                                                 <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
                                                 <a href="compare.html" class="action compare" title="Compare"><i
                                                         class="fas fa-sync"></i></a>
@@ -194,312 +195,40 @@
                                             </span>
                                             <span class="rating-num">( 5 Review )</span>
                                             </span>
-                                            <h5 class="title"><a href="single-product.html">Hand-Made Garlic Mortar
+                                            <h5 class="title"><a href="{% url 'single_product' product.slug %}">{{ product.title }}
                                                 </a>
                                             </h5>
                                             <span class="price">
-                                                <span class="new">$38.50</span>
+                                                <span class="new">${{ product.price }}</span>
                                             </span>
                                         </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
+                                        <button title="Add To Cart" class=" add-to-cart" data-product="{{ product.id }}" data-action="add">Add
+                                                        To Cart</button>
                                     </div>
                                 </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/2.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/2.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                                <span class="sale">-10%</span>
-                                            <span class="new">New</span>
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">Handmade Ceramic Pottery
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            <span class="old">$45.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                    <!-- Single Prodect -->
-                                </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/3.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/3.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                                <span class="new">Sale</span>
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">Hand Painted Bowls
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/4.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/5.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                                <span class="sale">-5%</span>
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">Antique Wooden Farm Large
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            <span class="old">$40.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                    <!-- Single Prodect -->
-                                </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-md-30px mb-lm-30px">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/6.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/6.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">Handmade Jute Basket
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6  mb-md-30px mb-lm-30px">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/7.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/7.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                                <span class="new">New</span>
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">Knitting yarn & crochet hook
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                    <!-- Single Prodect -->
-                                </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-es-30px">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/8.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/8.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                                <span class="sale">-8%</span>
-                                            <span class="new">New</span>
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">David Head Portraits
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            <span class="old">$44.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/9.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/10.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                                <span class="new">Sale</span>
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">solid wood cherry paddle
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                    <!-- Single Prodect -->
-                                </div>
+                                {% endfor %}
                             </div>
                         </div>
                         <!-- 1st tab end -->
                         <!-- 2nd tab start -->
                         <div class="tab-pane fade" id="tab-pottery">
                             <div class="row">
+                                {% for product in products %}
                                 <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
                                     <!-- Single Prodect -->
                                     <div class="product">
                                         <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/1.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/1.jpg' %}"
+                                            <a href="{% url 'single_product' product.slug %}" class="image">
+                                                <img src="{{ product.cover_image.url}}" alt="Product" />
+                                                <img class="hover-image" src="{{ product.cover_image.url}}"
                                                     alt="Product" />
                                             </a>
                                             <span class="badges">
                                                 <span class="new">New</span>
                                             </span>
                                             <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
+                                                <button title="Add To Wishlist" class="action wishlist add-to-wishlist" 
+                                                            data-product="{{ product.id }}" data-action="add"><i class="fas fa-heart"></i></button>
                                                 <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
                                                 <a href="compare.html" class="action compare" title="Compare"><i
                                                         class="fas fa-sync"></i></a>
@@ -512,312 +241,40 @@
                                             </span>
                                             <span class="rating-num">( 5 Review )</span>
                                             </span>
-                                            <h5 class="title"><a href="single-product.html">Hand-Made Garlic Mortar
+                                            <h5 class="title"><a href="{% url 'single_product' product.slug %}">{{ product.title }}
                                                 </a>
                                             </h5>
                                             <span class="price">
-                                                <span class="new">$38.50</span>
+                                                <span class="new">${{ product.price }}</span>
                                             </span>
                                         </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
+                                        <button title="Add To Cart" class=" add-to-cart" data-product="{{ product.id }}" data-action="add">Add
+                                                        To Cart</button>
                                     </div>
                                 </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/2.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/2.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                                <span class="sale">-10%</span>
-                                            <span class="new">New</span>
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">Handmade Ceramic Pottery
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            <span class="old">$45.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                    <!-- Single Prodect -->
-                                </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/3.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/3.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                                <span class="new">Sale</span>
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">Hand Painted Bowls
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/4.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/5.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                                <span class="sale">-5%</span>
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">Antique Wooden Farm Large
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            <span class="old">$40.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                    <!-- Single Prodect -->
-                                </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-md-30px mb-lm-30px">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/6.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/6.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">Handmade Jute Basket
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6  mb-md-30px mb-lm-30px">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/7.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/7.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                                <span class="new">New</span>
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">Knitting yarn & crochet hook
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                    <!-- Single Prodect -->
-                                </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-es-30px">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/8.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/8.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                                <span class="sale">-8%</span>
-                                            <span class="new">New</span>
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">David Head Portraits
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            <span class="old">$44.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/9.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/10.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                                <span class="new">Sale</span>
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">solid wood cherry paddle
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                    <!-- Single Prodect -->
-                                </div>
+                                {% endfor %}
                             </div>
                         </div>
                         <!-- 2nd tab end -->
                         <!-- 3rd tab start -->
                         <div class="tab-pane fade" id="tab-fabric">
                             <div class="row">
+                                {% for product in products %}
                                 <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
                                     <!-- Single Prodect -->
                                     <div class="product">
                                         <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/1.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/1.jpg' %}"
+                                            <a href="{% url 'single_product' product.slug %}" class="image">
+                                                <img src="{{ product.cover_image.url}}" alt="Product" />
+                                                <img class="hover-image" src="{{ product.cover_image.url}}"
                                                     alt="Product" />
                                             </a>
                                             <span class="badges">
                                                 <span class="new">New</span>
                                             </span>
                                             <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
+                                                <button title="Add To Wishlist" class="action wishlist add-to-wishlist" 
+                                                            data-product="{{ product.id }}" data-action="add"><i class="fas fa-heart"></i></button>
                                                 <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
                                                 <a href="compare.html" class="action compare" title="Compare"><i
                                                         class="fas fa-sync"></i></a>
@@ -830,312 +287,40 @@
                                             </span>
                                             <span class="rating-num">( 5 Review )</span>
                                             </span>
-                                            <h5 class="title"><a href="single-product.html">Hand-Made Garlic Mortar
+                                            <h5 class="title"><a href="{% url 'single_product' product.slug %}">{{ product.title }}
                                                 </a>
                                             </h5>
                                             <span class="price">
-                                                <span class="new">$38.50</span>
+                                                <span class="new">${{ product.price }}</span>
                                             </span>
                                         </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
+                                        <button title="Add To Cart" class=" add-to-cart" data-product="{{ product.id }}" data-action="add">Add
+                                                        To Cart</button>
                                     </div>
                                 </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/2.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/2.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                                <span class="sale">-10%</span>
-                                            <span class="new">New</span>
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">Handmade Ceramic Pottery
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            <span class="old">$45.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                    <!-- Single Prodect -->
-                                </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/3.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/3.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                                <span class="new">Sale</span>
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">Hand Painted Bowls
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/4.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/5.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                                <span class="sale">-5%</span>
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">Antique Wooden Farm Large
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            <span class="old">$40.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                    <!-- Single Prodect -->
-                                </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-md-30px mb-lm-30px">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/6.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/6.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">Handmade Jute Basket
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6  mb-md-30px mb-lm-30px">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/7.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/7.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                                <span class="new">New</span>
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">Knitting yarn & crochet hook
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                    <!-- Single Prodect -->
-                                </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-es-30px">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/8.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/8.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                                <span class="sale">-8%</span>
-                                            <span class="new">New</span>
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">David Head Portraits
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            <span class="old">$44.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/9.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/10.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                                <span class="new">Sale</span>
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">solid wood cherry paddle
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                    <!-- Single Prodect -->
-                                </div>
+                                {% endfor %}
                             </div>
                         </div>
                         <!-- 3rd tab end -->
                         <!-- 4th tab start -->
                         <div class="tab-pane fade" id="tab-paintings">
                             <div class="row">
+                                {% for product in products %}
                                 <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
                                     <!-- Single Prodect -->
                                     <div class="product">
                                         <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/1.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/1.jpg' %}"
+                                            <a href="{% url 'single_product' product.slug %}" class="image">
+                                                <img src="{{ product.cover_image.url}}" alt="Product" />
+                                                <img class="hover-image" src="{{ product.cover_image.url}}"
                                                     alt="Product" />
                                             </a>
                                             <span class="badges">
                                                 <span class="new">New</span>
                                             </span>
                                             <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
+                                                <button title="Add To Wishlist" class="action wishlist add-to-wishlist" 
+                                                            data-product="{{ product.id }}" data-action="add"><i class="fas fa-heart"></i></button>
                                                 <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
                                                 <a href="compare.html" class="action compare" title="Compare"><i
                                                         class="fas fa-sync"></i></a>
@@ -1148,312 +333,40 @@
                                             </span>
                                             <span class="rating-num">( 5 Review )</span>
                                             </span>
-                                            <h5 class="title"><a href="single-product.html">Hand-Made Garlic Mortar
+                                            <h5 class="title"><a href="{% url 'single_product' product.slug %}">{{ product.title }}
                                                 </a>
                                             </h5>
                                             <span class="price">
-                                                <span class="new">$38.50</span>
+                                                <span class="new">${{ product.price }}</span>
                                             </span>
                                         </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
+                                        <button title="Add To Cart" class=" add-to-cart" data-product="{{ product.id }}" data-action="add">Add
+                                                        To Cart</button>
                                     </div>
                                 </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/2.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/2.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                                <span class="sale">-10%</span>
-                                            <span class="new">New</span>
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">Handmade Ceramic Pottery
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            <span class="old">$45.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                    <!-- Single Prodect -->
-                                </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/3.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/3.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                                <span class="new">Sale</span>
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">Hand Painted Bowls
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/4.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/5.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                                <span class="sale">-5%</span>
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">Antique Wooden Farm Large
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            <span class="old">$40.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                    <!-- Single Prodect -->
-                                </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-md-30px mb-lm-30px">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/6.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/6.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">Handmade Jute Basket
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6  mb-md-30px mb-lm-30px">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/7.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/7.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                                <span class="new">New</span>
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">Knitting yarn & crochet hook
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                    <!-- Single Prodect -->
-                                </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-es-30px">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/8.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/8.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                                <span class="sale">-8%</span>
-                                            <span class="new">New</span>
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">David Head Portraits
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            <span class="old">$44.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/9.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/10.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                                <span class="new">Sale</span>
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">solid wood cherry paddle
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                    <!-- Single Prodect -->
-                                </div>
+                                {% endfor %}
                             </div>
                         </div>
                         <!-- 4th tab end -->
                         <!-- 5th tab start -->
                         <div class="tab-pane fade" id="tab-sculptures">
                             <div class="row">
+                                {% for product in products %}
                                 <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
                                     <!-- Single Prodect -->
                                     <div class="product">
                                         <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/1.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/1.jpg' %}"
+                                            <a href="{% url 'single_product' product.slug %}" class="image">
+                                                <img src="{{ product.cover_image.url}}" alt="Product" />
+                                                <img class="hover-image" src="{{ product.cover_image.url}}"
                                                     alt="Product" />
                                             </a>
                                             <span class="badges">
                                                 <span class="new">New</span>
                                             </span>
                                             <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
+                                                <button title="Add To Wishlist" class="action wishlist add-to-wishlist" 
+                                                            data-product="{{ product.id }}" data-action="add"><i class="fas fa-heart"></i></button>
                                                 <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
                                                 <a href="compare.html" class="action compare" title="Compare"><i
                                                         class="fas fa-sync"></i></a>
@@ -1466,312 +379,40 @@
                                             </span>
                                             <span class="rating-num">( 5 Review )</span>
                                             </span>
-                                            <h5 class="title"><a href="single-product.html">Hand-Made Garlic Mortar
+                                            <h5 class="title"><a href="{% url 'single_product' product.slug %}">{{ product.title }}
                                                 </a>
                                             </h5>
                                             <span class="price">
-                                                <span class="new">$38.50</span>
+                                                <span class="new">${{ product.price }}</span>
                                             </span>
                                         </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
+                                        <button title="Add To Cart" class=" add-to-cart" data-product="{{ product.id }}" data-action="add">Add
+                                                        To Cart</button>
                                     </div>
                                 </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/2.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/2.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                                <span class="sale">-10%</span>
-                                            <span class="new">New</span>
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">Handmade Ceramic Pottery
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            <span class="old">$45.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                    <!-- Single Prodect -->
-                                </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/3.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/3.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                                <span class="new">Sale</span>
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">Hand Painted Bowls
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/4.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/5.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                                <span class="sale">-5%</span>
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">Antique Wooden Farm Large
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            <span class="old">$40.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                    <!-- Single Prodect -->
-                                </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-md-30px mb-lm-30px">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/6.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/6.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">Handmade Jute Basket
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6  mb-md-30px mb-lm-30px">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/7.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/7.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                                <span class="new">New</span>
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">Knitting yarn & crochet hook
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                    <!-- Single Prodect -->
-                                </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-es-30px">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/8.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/8.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                                <span class="sale">-8%</span>
-                                            <span class="new">New</span>
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">David Head Portraits
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            <span class="old">$44.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/9.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/10.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                                <span class="new">Sale</span>
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">solid wood cherry paddle
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                    <!-- Single Prodect -->
-                                </div>
+                                {% endfor %}
                             </div>
                         </div>
                         <!-- 5th tab end -->
                         <!-- 6th tab start -->
                         <div class="tab-pane fade" id="tab-wooden">
                             <div class="row">
+                                {% for product in products %}
                                 <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
                                     <!-- Single Prodect -->
                                     <div class="product">
                                         <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/1.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/1.jpg' %}"
+                                            <a href="{% url 'single_product' product.slug %}" class="image">
+                                                <img src="{{ product.cover_image.url}}" alt="Product" />
+                                                <img class="hover-image" src="{{ product.cover_image.url}}"
                                                     alt="Product" />
                                             </a>
                                             <span class="badges">
                                                 <span class="new">New</span>
                                             </span>
                                             <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
+                                                <button title="Add To Wishlist" class="action wishlist add-to-wishlist" 
+                                                            data-product="{{ product.id }}" data-action="add"><i class="fas fa-heart"></i></button>
                                                 <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
                                                 <a href="compare.html" class="action compare" title="Compare"><i
                                                         class="fas fa-sync"></i></a>
@@ -1784,291 +425,18 @@
                                             </span>
                                             <span class="rating-num">( 5 Review )</span>
                                             </span>
-                                            <h5 class="title"><a href="single-product.html">Hand-Made Garlic Mortar
+                                            <h5 class="title"><a href="{% url 'single_product' product.slug %}">{{ product.title }}
                                                 </a>
                                             </h5>
                                             <span class="price">
-                                                <span class="new">$38.50</span>
+                                                <span class="new">${{ product.price }}</span>
                                             </span>
                                         </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
+                                        <button title="Add To Cart" class=" add-to-cart" data-product="{{ product.id }}" data-action="add">Add
+                                                        To Cart</button>
                                     </div>
                                 </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/2.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/2.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                                <span class="sale">-10%</span>
-                                            <span class="new">New</span>
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">Handmade Ceramic Pottery
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            <span class="old">$45.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                    <!-- Single Prodect -->
-                                </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/3.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/3.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                                <span class="new">Sale</span>
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">Hand Painted Bowls
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/4.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/5.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                                <span class="sale">-5%</span>
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">Antique Wooden Farm Large
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            <span class="old">$40.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                    <!-- Single Prodect -->
-                                </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-md-30px mb-lm-30px">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/6.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/6.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">Handmade Jute Basket
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6  mb-md-30px mb-lm-30px">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/7.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/7.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                                <span class="new">New</span>
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">Knitting yarn & crochet hook
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                    <!-- Single Prodect -->
-                                </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-es-30px">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/8.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/8.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                                <span class="sale">-8%</span>
-                                            <span class="new">New</span>
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">David Head Portraits
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            <span class="old">$44.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6">
-                                    <!-- Single Prodect -->
-                                    <div class="product">
-                                        <div class="thumb">
-                                            <a href="single-product.html" class="image">
-                                                <img src="{% static 'images/product-image/9.jpg' %}" alt="Product" />
-                                                <img class="hover-image" src="{% static 'images/product-image/10.jpg' %}"
-                                                    alt="Product" />
-                                            </a>
-                                            <span class="badges">
-                                                <span class="new">Sale</span>
-                                            </span>
-                                            <div class="actions">
-                                                <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                        class="fas fa-heart"></i></a>
-                                                <a href="#" class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-eye"></i></a>
-                                                <a href="compare.html" class="action compare" title="Compare"><i
-                                                        class="fas fa-sync"></i></a>
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                            </span>
-                                            <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                            <h5 class="title"><a href="single-product.html">solid wood cherry paddle
-                                                </a>
-                                            </h5>
-                                            <span class="price">
-                                                <span class="new">$38.50</span>
-                                            </span>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                    <!-- Single Prodect -->
-                                </div>
+                                {% endfor %}
                             </div>
                         </div>
                         <!-- 6th tab end -->
@@ -3246,63 +1614,25 @@
             <!-- section title start -->
 
             <div class="row">
+                {% for blog in blogs %}
                 <div class="col-lg-4 col-md-6 mb-md-30px mb-lm-30px">
                     <div class="single-blog">
                         <div class="blog-image">
-                            <a href="blog-single.html"><img src="{% static 'images/blog-image/1.jpg' %}"
+                            <a href="{% url 'blog_single' blog.slug %}"><img src="{{ blog.cover_image.url }}"
                                     class="img-responsive w-100" alt=""></a>
                         </div>
                         <div class="blog-text">
                             <div class="blog-athor-date">
-                                <span> By,<a class="blog-author cercle-shape" href="#"> June Cha</a></span>
-                                <span class="blog-date">25 May, 2023</span>
+                                <span> By,<a class="blog-author cercle-shape" href="#">{{blog.user.username}}</a></span>
+                                <span class="blog-date">{{ blog.created_at|date:"M d, Y" }}</span>
                             </div>
-                            <h5 class="blog-heading"><a class="blog-heading-link" href="blog-single.html">How to Explain Handmade Product to Your Boss</a></h5>
+                            <h5 class="blog-heading"><a class="blog-heading-link" href="{% url 'blog_single' blog.slug %}">{{ blog.title }}</a></h5>
 
-                            <a href="blog-single.html" class="btn btn-primary blog-btn"> Read More</a>
+                            <a href="{% url 'blog_single' blog.slug %}" class="btn btn-primary blog-btn"> Read More</a>
                         </div>
                     </div>
                 </div>
-                <!-- End single blog -->
-                <div class="col-lg-4 col-md-6 mb-md-30px mb-lm-30px">
-                    <div class="single-blog ">
-                        <div class="blog-image">
-                            <a href="blog-single.html"><img src="{% static 'images/blog-image/2.jpg' %}"
-                                    class="img-responsive w-100" alt=""></a>
-                        </div>
-                        <div class="blog-text">
-                            <div class="blog-athor-date">
-                                <span> By,<a class="blog-author cercle-shape" href="#"> June Cha</a></span>
-                                <span class="blog-date">25 May, 2023</span>
-                            </div>
-                            <h5 class="blog-heading"><a class="blog-heading-link" href="blog-single.html">7 Best Blogs to Follow About Handmade Goods
-                                </a></h5>
-
-                            <a href="blog-single.html" class="btn btn-primary blog-btn"> Read More</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- End single blog -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-blog">
-                        <div class="blog-image">
-                            <a href="blog-single.html"><img src="{% static 'images/blog-image/3.jpg' %}"
-                                    class="img-responsive w-100" alt=""></a>
-                        </div>
-                        <div class="blog-text">
-                            <div class="blog-athor-date">
-                                <span> By,<a class="blog-author cercle-shape" href="#"> June Cha</a></span>
-                                <span class="blog-date">25 May, 2023</span>
-                            </div>
-                            <h5 class="blog-heading"><a class="blog-heading-link" href="blog-single.html">Us Too. 6 Reasons We Just Can't Stop
-                                </a></h5>
-
-
-                            <a href="blog-single.html" class="btn btn-primary blog-btn"> Read More</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- End single blog -->
+                {% endfor %}
             </div>
         </div>
     </div>

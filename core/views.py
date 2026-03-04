@@ -4,8 +4,9 @@ from django.urls import reverse_lazy
 from core.forms import ContactForm
 from django.contrib import messages
 from core.tasks import export
-from product.models import Product, ProductCategory, WishList
-from order.models import Basket, BasketItem
+from product.models import Product, ProductCategory, WishList, BestSeller
+from order.models import Basket
+from blog.models import BLog
 from django.views.generic import CreateView
 from django.utils.translation import gettext_lazy as _
 # Create your views here.
@@ -26,12 +27,16 @@ def homepage(request):
         wishlist = None
     products = Product.objects.all() # Django ORM 
     categories = ProductCategory.objects.filter(parent = None)
+    blogs = BLog.objects.all()[:3]
+    bestsellers = BestSeller.objects.all()[:4]
     
     context = {
         'products' : products,
         'categories' : categories,
         'basket' : basket,
-        'wishlist' : wishlist
+        'wishlist' : wishlist,
+        'blogs' : blogs,
+        'bestsellers' : bestsellers
     }
     return render(request, 'index.html', context)
 

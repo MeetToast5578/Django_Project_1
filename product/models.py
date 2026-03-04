@@ -105,3 +105,9 @@ class WishListItem(AbstractModel):
     
     def __str__(self):
         return f'{self.wishlist.user.username}\'s WishList Item: {self.product.title}'
+    
+class BestSeller(AbstractModel):
+    product = models.ForeignKey(Product, related_name='best_seller', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.product.title} is a Best Seller'

@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import (ProductCategory, Product, ProductTag, ProductImage,
-                     ProductReview, ProductDiscount, ProductColor, ProductSize, WishList, WishListItem)
+                     ProductReview, ProductDiscount, ProductColor, ProductSize, WishList, WishListItem,
+                     BestSeller)
 from modeltranslation.admin import TranslationAdmin
 # Register your models here.
 
@@ -21,6 +22,7 @@ admin.site.register(ProductColor)
 admin.site.register(ProductSize)
 admin.site.register(WishList)
 admin.site.register(WishListItem)
+admin.site.register(BestSeller)
 
 class ProductImageInline(admin.TabularInline):
     model = ProductImage
