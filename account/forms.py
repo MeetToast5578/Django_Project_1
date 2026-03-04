@@ -30,7 +30,10 @@ class ProfileForm(forms.ModelForm):
 
     def save(self, commit = ...):
         user = super().save(commit)
-    
+        first_name = self.cleaned_data['fullname'].split()[0]
+        last_name = self.cleaned_data['fullname'].split()[1]
+        self.instance.first_name = first_name
+        self.instance.last_name = last_name
         user.save()
 
 class LoginForm(forms.Form):

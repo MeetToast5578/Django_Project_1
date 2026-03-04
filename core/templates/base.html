@@ -49,7 +49,7 @@
                 <div class="row">
                     <div class="col-auto align-self-center">
                         <div class="header-logo">
-                            <a href="{% url 'home' %}"><img src="{% static 'images/logo/logo.png' %}" alt="Site Logo" ></a>
+                            <a href="{% url 'home' %}"><img src="{% static 'images/logo/django.png' %}" alt="Site Logo" ></a>
                         </div>
                     </div>
                     <div class="col align-self-center d-none d-lg-block"> 
@@ -94,11 +94,6 @@
                                 <li class="dropdown "><a href="{% url 'blog' %}">{% trans 'Blog' %}</a>
                                     
                                     <li><a href="{% url 'contact' %}">{% trans 'Contact' %}</a></li>
-                                    {% if request.user.is_authenticated %}
-                                    <li><a class="nav-link" href="{% url 'logout' %}">{% trans 'Logout' %}</a></li>
-                                    {% else %}
-                                    <li><a class="nav-link" href="{% url 'login' %}">{% trans 'Login' %}</a></li>
-                                    {% endif %}
                                 <li class="dropdown">
                                     <a href="#" class="language-toggle">{% trans 'Language' %}<i class="fas fa-angle-down"></i></a>
                                     <ul class="dropdown-menu language-dropdown">
@@ -135,7 +130,11 @@
                                 <ul class="dropdown-menu dropdown-menu-right">
                                     <li><a class="dropdown-item" href="{% url 'my_account' %}">My account</a></li>
                                     <li><a class="dropdown-item" href="{% url 'checkout' %}">Checkout</a></li>
+                                    {% if  request.user.is_authenticated %}
+                                    <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                                    {% else %}
                                     <li><a class="dropdown-item" href="{% url 'login' %}">Sign in</a></li>
+                                    {% endif %}
                                 </ul>
                             </div>
                             <!-- Single Wedge Start -->
