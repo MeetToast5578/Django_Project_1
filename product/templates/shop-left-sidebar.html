@@ -166,8 +166,10 @@
                                                             <span class="new">New</span>
                                                         </span>
                                                         <div class="actions">
-                                                            <a href="wishlist.html" class="action wishlist"
-                                                                title="Wishlist"><i class="fas fa-heart"></i></a>
+                                                            <button title="Add To Wishlist" class="action wishlist add-to-wishlist" 
+                                                            data-product="{{ product.id }}" data-action="add"><i class="fas fa-heart"></i></button>
+                                                            {% comment %} <a href="wishlist.html" class="action wishlist"
+                                                                title="Wishlist"><i class="fas fa-heart"></i></a> {% endcomment %}
                                                             <a href="#" class="action quickview"
                                                                 data-link-action="quickview" title="Quick view"
                                                                 data-bs-toggle="modal" data-bs-target="#exampleModal"><i

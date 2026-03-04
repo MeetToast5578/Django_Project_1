@@ -17,7 +17,7 @@ class ShopListView(ListView):
     template_name = 'shop-left-sidebar.html'
     model = Product
     context_object_name = 'products'
-    paginate_by = 3
+    paginate_by = 6
     queryset = Product.objects.all()
 
     def get_queryset(self):
@@ -89,8 +89,10 @@ class ShopDetailView(FormMixin, DetailView):
 
 def single_product(request, pk):
     product = get_object_or_404(Product, id = pk)
+    related_products = Product.objects.filter(category = product.category).exclude(id = product.id)[:4]
 
     context = {
-        'product' : product
+        'product' : product,
+        'related_products' : related_products
     }
     return render(request, 'single-product.html', context)

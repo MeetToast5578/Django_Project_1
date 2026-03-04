@@ -91,6 +91,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'core.context_processors.basket_context',
+                'account.context_processors.wishlist_context',
             ],
         },
     },
@@ -176,8 +177,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = "smtp.gmail.com"
-EMAIL_HOST_USER = "g.heyderov@gmail.com"
-EMAIL_HOST_PASSWORD = "jbuq ndrv dpht myaj"
+EMAIL_HOST_USER = "jonasangler347@gmail.com"
+EMAIL_HOST_PASSWORD = "AdeniumGrace5578"
 EMAIL_PORT = 587
 
 

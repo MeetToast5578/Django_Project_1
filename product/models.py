@@ -85,3 +85,23 @@ class ProductSize(AbstractModel):
 
     def __str__(self):
         return f'{self.product.title} / {self.size_name}'
+    
+    
+
+class WishList(AbstractModel):
+    user = models.ForeignKey(User, related_name='wishlist', on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return f'{self.user.username}\'s WishList'
+    
+class WishListItem(AbstractModel): 
+    wishlist = models.ForeignKey(WishList, related_name='items', on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, related_name='wishlist_items', on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+    
+    
+    def total_price(self):
+        return self.product.price * self.quantity
+    
+    def __str__(self):
+        return f'{self.wishlist.user.username}\'s WishList Item: {self.product.title}'

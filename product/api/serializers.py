@@ -13,9 +13,6 @@ class SubscribeSerializer(serializers.ModelSerializer):
         ]
 
 
-
-
-
 class ProductTagSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -27,9 +24,6 @@ class ProductTagSerializer(serializers.ModelSerializer):
         ]
 
 
-
-
-
 class ProductCategorySerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -39,7 +33,6 @@ class ProductCategorySerializer(serializers.ModelSerializer):
             'parent',
             'title'
         ]
-
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -60,7 +53,6 @@ class ProductSerializer(serializers.ModelSerializer):
             'category',
             'tags'
         ]
-        
         
         
 class ProductCreateSerializer(serializers.ModelSerializer):

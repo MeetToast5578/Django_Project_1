@@ -278,14 +278,14 @@
             </div>
             <div class="new-product-slider swiper-container slider-nav-style-1 pb-100px">
                 <div class="new-product-wrapper swiper-wrapper">
-                    
+                    {% for related_product in related_products %}
                     <div class="new-product-item swiper-slide">
-                        <!-- Single Prodect -->
+                        <!-- Single Prodect -->    
                         <div class="product">
                             <div class="thumb">
-                                <a href="single-product.html" class="image">
-                                    <img src="{{ product.cover_image.url }}" alt="Product" />
-                                    <img class="hover-image" src="{{ product.cover_image.url }}" alt="Product" />
+                                <a href="{% url 'single_product' related_product.id %}" class="image">
+                                    <img src="{{ related_product.cover_image.url }}" alt="Product" />
+                                    <img class="hover-image" src="{{ related_product.cover_image.url }}" alt="Product" />
                                 </a>
                                 <span class="badges">
                                     <span class="new">New</span>
@@ -307,18 +307,18 @@
                                     </span>
                                     <span class="rating-num">( 5 Review )</span>
                                 </span>
-                                <h5 class="title"><a href="single-product.html">Hand-Made Garlic Mortar
+                                <h5 class="title"><a href="{% url 'single_product' related_product.id %}">{{ related_product.title }}</a></h5>
                                     </a>
                                 </h5>
                                 <span class="price">
-                                    <span class="new">$38.50</span>
+                                    <span class="new">${{ related_product.price|floatformat:2 }}</span>
                                 </span>
                             </div>
-                            <button title="Add To Cart" class=" add-to-cart" data-product="{{ product.id }}" data-action="add">Add
+                            <button title="Add To Cart" class=" add-to-cart" data-product="{{ related_product.id }}" data-action="add">Add
                                 To Cart</button>
                         </div>
                     </div>
-
+                    {% endfor %}
                 </div>
                 <!-- Add Arrows -->
                 <div class="swiper-buttons">

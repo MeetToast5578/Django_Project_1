@@ -11,6 +11,11 @@ from django.template.loader import render_to_string
 from account.tokens import account_activation_token
 from django.utils.encoding import force_bytes
 
+
+from product.models import Product, WishList, WishListItem
+from django.http import JsonResponse
+import json
+
 from django.contrib.auth import get_user_model
 User = get_user_model()
 from django.utils.http import urlsafe_base64_decode
@@ -87,9 +92,46 @@ def my_account(request):
     }
     return render(request, 'my-account.html', context)
 
+
+
+def update_item(request):
+    data = json.loads(request.body)
+    productId = data['productId']
+    action = data['action']
+    print(productId)
+    print(action)
+
+    product = Product.objects.get(id = productId)
+
+    wishlist, created = WishList.objects.get_or_create(user = request.user)
+    wishlistItem, created = WishListItem.objects.get_or_create(wishlist = wishlist, product = product)
+
+    if action == 'add':
+        if created:
+            wishlistItem.quantity = 1
+        else:
+            wishlistItem.quantity += 1
+
+    if action == 'remove' and wishlistItem.quantity > 1:
+        wishlistItem.quantity -= 1
+
+    wishlistItem.save()
+
+    if action == 'delete':
+        wishlistItem.delete()
+
+    return JsonResponse('Item was updated!', safe=False)
+
 @login_required(login_url='login')
 def wishlist(request):
-    return render(request, 'wishlist.html')
+    if request.user.is_authenticated:
+        wishlist = WishList.objects.filter(user = request.user).first()
+    else:
+        wishlist = None
+    context = {
+        'wishlist' : wishlist
+    }
+    return render(request, 'wishlist.html', context)
 
 
 def logout(request):

@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import ProductCategory, Product, ProductTag, ProductImage, ProductReview, ProductDiscount, ProductColor, ProductSize
+from .models import (ProductCategory, Product, ProductTag, ProductImage,
+                     ProductReview, ProductDiscount, ProductColor, ProductSize, WishList, WishListItem)
 from modeltranslation.admin import TranslationAdmin
 # Register your models here.
 
@@ -18,7 +19,8 @@ admin.site.register(ProductReview)
 admin.site.register(ProductDiscount)
 admin.site.register(ProductColor)
 admin.site.register(ProductSize)
-
+admin.site.register(WishList)
+admin.site.register(WishListItem)
 
 class ProductImageInline(admin.TabularInline):
     model = ProductImage

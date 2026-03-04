@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from core.forms import ContactForm
 from django.contrib import messages
 from core.tasks import export
-from product.models import Product, ProductCategory
+from product.models import Product, ProductCategory, WishList
 from order.models import Basket, BasketItem
 from django.views.generic import CreateView
 from django.utils.translation import gettext_lazy as _
@@ -20,8 +20,10 @@ def export_view(request):
 def homepage(request):
     if request.user.is_authenticated:
         basket = Basket.objects.filter(user = request.user, is_active = True).first()
+        wishlist = WishList.objects.filter(user = request.user).first()
     else:
         basket = None
+        wishlist = None
     products = Product.objects.all() # Django ORM 
     categories = ProductCategory.objects.filter(parent = None)
     
@@ -29,6 +31,7 @@ def homepage(request):
         'products' : products,
         'categories' : categories,
         'basket' : basket,
+        'wishlist' : wishlist
     }
     return render(request, 'index.html', context)
 

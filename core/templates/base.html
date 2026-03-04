@@ -170,33 +170,16 @@
             </div>
             <div class="body customScroll">
                 <ul class="minicart-product-list">
+                    {% for item in wishlist.items.all %}
                     <li>
-                        <a href="single-product.html" class="image"><img src="{% static 'images/product-image/1.jpg' %}"
-                                alt="Cart product Image"></a>
+                        <a href="single-product.html" class="image"><img src="{{ item.product.cover_image.url }}" alt="Cart product Image"></a>
                         <div class="content">
-                            <a href="single-product.html" class="title">Hand-Made Garlic Mortar</a>
-                            <span class="quantity-price">1 x <span class="amount">$21.86</span></span>
+                            <a href="single-product.html" class="title">{{ item.product.title }}</a>
+                            <span class="quantity-price">{{ item.quantity }} x <span class="amount">${{ item.product.price }}</span></span>
                             <a href="#" class="remove">×</a>
                         </div>
                     </li>
-                    <li>
-                        <a href="#" class="image"><img src="{% static 'images/product-image/2.jpg' %}"
-                                alt="Cart product Image"></a>
-                        <div class="content">
-                            <a href="#" class="title">Handmade Ceramic Pottery</a>
-                            <span class="quantity-price">1 x <span class="amount">$13.28</span></span>
-                            <a href="#" class="remove">×</a>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="#" class="image"><img src="{% static 'images/product-image/3.jpg' %}"
-                                alt="Cart product Image"></a>
-                        <div class="content">
-                            <a href="#" class="title">Hand Painted Bowls</a>
-                            <span class="quantity-price">1 x <span class="amount">$17.34</span></span>
-                            <a href="#" class="remove">×</a>
-                        </div>
-                    </li>
+                    {% endfor %}
                 </ul>
             </div>
             <div class="foot">
@@ -705,7 +688,7 @@
     <script src="{% static 'js/plugins/plugins.min.js' %}"></script>
     <script src="{% static 'js/subscriber.js' %}"></script>
     <script src="{% static 'js/cart.js' %}"></script>
-
+    <script src="{% static 'js/wishlist.js' %}"></script>
 
     <!-- Main Js -->
     <script src="{% static 'js/main.js' %}"></script>

@@ -7,5 +7,4 @@ app.config_from_object("django.conf:settings", namespace="CELERY")
 app.autodiscover_tasks()
 
 # python -m celery -A config worker -l info
-# celery -A config worker --beat --scheduler django --loglevel=info
 # celery -A config beat --scheduler django --loglevel=info

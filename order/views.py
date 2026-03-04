@@ -3,6 +3,7 @@ from order.models import Basket, BasketItem
 from product.models import Product
 from django.http import JsonResponse
 import json
+from product.models import WishList, WishListItem
 
 # Create your views here.
 
@@ -18,12 +19,23 @@ def update_item(request):
 
     basket, created = Basket.objects.get_or_create(user = request.user, is_active = True)
     basketItem, created = BasketItem.objects.get_or_create(basket = basket, product = product)
+    wishListItem, created = WishListItem.objects.get_or_create(wishlist__user=request.user, product=product)
 
     if action == 'add':
         if created:
             basketItem.quantity = 1
         else:
             basketItem.quantity += 1
+    
+    if action == 'add-full':
+        product_quantity = WishListItem.objects.filter(wishlist__user=request.user, product=product).first().quantity
+        
+        if created:
+            basketItem.quantity = product_quantity
+        else:
+            basketItem.quantity += product_quantity
+            
+        wishListItem.delete()
 
     if action == 'remove' and basketItem.quantity > 1:
         basketItem.quantity -= 1
