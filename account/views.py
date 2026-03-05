@@ -153,6 +153,7 @@ def update_item(request):
     product = Product.objects.get(id = productId)
 
     wishlist, created = WishList.objects.get_or_create(user = request.user)
+    print(wishlist)
     wishlistItem, created = WishListItem.objects.get_or_create(wishlist = wishlist, product = product)
 
     if action == 'add':

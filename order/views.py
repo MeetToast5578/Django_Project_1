@@ -19,7 +19,7 @@ def update_item(request):
 
     basket, created = Basket.objects.get_or_create(user = request.user, is_active = True)
     basketItem, created = BasketItem.objects.get_or_create(basket = basket, product = product)
-    wishListItem, created = WishListItem.objects.get_or_create(wishlist__user=request.user, product=product)
+    # wishListItem, created = WishListItem.objects.get_or_create(wishlist__user=request.user, product=product)
 
     if action == 'add':
         if created:

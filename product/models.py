@@ -111,3 +111,12 @@ class BestSeller(AbstractModel):
 
     def __str__(self):
         return f'{self.product.title} is a Best Seller'
+    
+
+class ProductInformation(AbstractModel):
+    product = models.ForeignKey(Product, related_name='information', on_delete=models.CASCADE)
+    key = models.CharField(max_length=100)
+    value = models.CharField(max_length=200)
+
+    def __str__(self):
+        return f'{self.product.title} / {self.key}: {self.value}'
