@@ -35,7 +35,7 @@ def update_item(request):
         else:
             basketItem.quantity += product_quantity
             
-        wishListItem.delete()
+        # wishListItem.delete()
 
     if action == 'remove' and basketItem.quantity > 1:
         basketItem.quantity -= 1

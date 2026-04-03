@@ -1,18 +1,33 @@
-# Use postgres/example user/password credentials
+version: '3'
 
 services:
-
-  db:
-    image: postgres:16
-    restart: always
-    ports: 
-      - 5432:5432
-    environment:
-      POSTGRES_USER: 'user'
-      POSTGRES_PASSWORD: '12345'
-      POSTGRES_DB: 'shop'
+  postgres:
+    container_name:  postgres-db
+    image: postgres:18
+    ports:
+      - 5432:5432 # Bind host port 5432 to PostgreSQL port 5432
     volumes:
-      - ./pgdb/data:/var/lib/postgresql/data
+      - ./postgres_data:/var/lib/postgresql
+    env_file: .env
+    environment:
+      - LC_ALL=C.UTF-8
+
+  web:
+    container_name: shop
+    build: .
+    restart: "always"
+    env_file: .env
+    volumes:
+      - .:/code
+      - ./static/:/code/static/
+      - ./media/:/code/media/
+    ports:
+      - "8000:8000"
+    links:
+      - postgres
+    depends_on:
+      - "postgres"
+
 
   adminer:
     image: adminer
@@ -20,9 +35,25 @@ services:
     ports:
       - 8080:8080
 
+  celery:
+    container_name: celery
+    command: celery -A config worker
+    build: 
+      context: .
+      dockerfile: celery.dockerfile
+    depends_on: 
+      - "postgres"
+      - "redis"
+    env_file: .env
 
   redis:
     image: redis
-    restart: always
-    ports:
+    ports: 
       - 6379:6379
+    restart: always
+
+
+networks:
+    default:
+        external:
+            name: nginx-proxy
