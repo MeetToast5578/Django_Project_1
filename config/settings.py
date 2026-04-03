@@ -23,7 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-1b+7@l5t^j0o2^oz#rr#dvo2q8jwl%**7_44-w7zo(f3^9xwi6'
+DEBUG = int(os.environ.get("DEBUG", default=1))
+PROD = not DEBUG
+SECRET_KEY = os.environ.get("SECRET_KEY", "ggq4x=e3cnwpku^*v43er-=)f7f9ty^vnjwfb@w0p_y)^it9*&")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -108,13 +110,14 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'shop',
-        'USER': 'user',
-        'PASSWORD' : '12345',
-        'PORT': 5432,
-        'HOST': 'localhost' # ip4
+        'NAME': os.environ.get('POSTGRES_DB', 'db_name'),
+        'USER': os.environ.get('POSTGRES_USER', 'user_name'),
+        'PORT': os.environ.get('POSTGRES_PORT', 5432),
+        'HOST': os.environ.get('POSTGRES_HOST', '49.13.123.78'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', '123')
     }
 }
+
 
 AUTH_USER_MODEL = 'account.user'
 
@@ -164,7 +167,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR / "static"]
+
+if PROD:
+    STATIC_ROOT = os.path.join(BASE_DIR, "static")
+else:
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, "static")
+    ]
 
 MEDIA_URL = '/media/'
 
